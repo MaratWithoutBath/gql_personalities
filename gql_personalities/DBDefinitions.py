@@ -55,53 +55,50 @@ class RankModel(BaseModel):
     __tablename__ = "personalitiesranks"
 
     id = UUIDColumn()
-    start = Column(DateTime)
-    end = Column(DateTime)
+    start = Column(DateTime, comment="zacatek platnosti hodnosti")
+    end = Column(DateTime, comment="konec platnosti hodnosti")
 
-    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
-    rankType_id = Column(ForeignKey("personalitiesranktypes.id"), index=True)
+    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    rankType_id = Column(ForeignKey("personalitiesranktypes.id"), index=True, comment="id hodnosti")
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="tvorba zaznamu")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="posledni zmena")
+    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
 
 
     #user = relationship("UserModel", back_populates="ranks", foreign_keys=[user_id])
-    rankType = relationship("RankTypeModel", back_populates="rank")
+    rankType = relationship("RankTypeModel", back_populates="rank", comment="horní vazba typu hodnosti")
 
 
 class RankTypeModel(BaseModel):
     __tablename__ = "personalitiesranktypes"
 
     id = UUIDColumn()
-    name = Column(String)
-    name_en = Column(String)
+    name = Column(String, comment="název hodnosti")
+    name_en = Column(String, comment="název hodnosti v angličtině")
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="datum vytvoření")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="datum poslední změny")
+    changedby = UUIDFKey(nullable=True), comment="změneno kým"#Column(ForeignKey("users.id"), index=True, nullable=True)
 
-    rank = relationship("RankModel", back_populates="rankType")
+    rank = relationship("RankModel", back_populates="rankType", comment="horní vazba na hodnost")
 
 
 class StudyModel(BaseModel):
     __tablename__ = "personalitiesstudies"
 
     id = UUIDColumn()
-    name = Column(String)
-    name_en = Column(String)
-    program = Column(String)
-    start = Column(DateTime)
-    end = Column(DateTime)
+    name = Column(String, comment="název studia")
+    name_en = Column(String, comment="název studia v angličtině")
+    program = Column(String, comment="program studia")
+    start = Column(DateTime, comment="začátek studia")
+    end = Column(DateTime, comment="konec studia")
 
-    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
+    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
+    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
 
     #user = relationship("UserModel", back_populates="studies", foreign_keys=[user_id])
 
@@ -110,52 +107,51 @@ class CertificateModel(BaseModel):
     __tablename__ = "personalitiescertificates"
 
     id = UUIDColumn()
-    level = Column(String)
-    validity_start = Column(DateTime)
-    validity_end = Column(DateTime)
+    level = Column(String, comment="úroveň certifikátu")
+    validity_start = Column(DateTime, comment="platnost od")
+    validity_end = Column(DateTime, comment="platnost do")
 
-    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
-    certificateType_id = Column(ForeignKey("personalitiescertificatetypes.id"), index=True)
+    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    certificateType_id = Column(ForeignKey("personalitiescertificatetypes.id"), index=True, comment="id typu certifikátu")
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
+    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
+   
     #user = relationship("UserModel", back_populates="certificates", foreign_keys=[user_id])
-    certificateType = relationship("CertificateTypeModel", back_populates="certificates")
+    certificateType = relationship("CertificateTypeModel", back_populates="certificates", comment="horní vazba na typ certifikátu")
 
 
 class CertificateTypeModel(BaseModel):
     __tablename__ = "personalitiescertificatetypes"
 
     id = UUIDColumn()
-    name = Column(String)
-    name_en = Column(String)
+    name = Column(String, comment="název certifikátu")
+    name_en = Column(String, comment="název certifikátu v angličtině")
 
     certificateTypeGroup_id = Column(
-        ForeignKey("personalitiescertificatecategories.id")
+        ForeignKey("personalitiescertificatecategories.id"),
+        comment="id skupiny certifikátů",
     )
 
-    certificates = relationship("CertificateModel", back_populates="certificateType")
+    certificates = relationship("CertificateModel", back_populates="certificateType", comment="horní vazba na certifikát")
     certificateTypeGroup = relationship(
-        "CertificateTypeGroupModel", back_populates="certificateType"
+        "CertificateTypeGroupModel", back_populates="certificateType", comment="horní vazba na skupinu certifikátů"
     )
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
-    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
+    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
 
 class CertificateTypeGroupModel(BaseModel):
     __tablename__ = "personalitiescertificatecategories"
 
     id = UUIDColumn()
-    name = Column(String)
-    name_en = Column(String)
+    name = Column(String, comment="název skupiny certifikátů")
+    name_en = Column(String, comment="název skupiny certifikátů v angličtině")
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now())
-    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now())
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
+    lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
     changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
     changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
 
