@@ -55,8 +55,8 @@ class RankModel(BaseModel):
     __tablename__ = "personalitiesranks"
 
     id = UUIDColumn()
-    start = Column(DateTime), comment = "počáteční datum, kdy osoba začala zastávat danou hodnost"
-    end = Column(DateTime), comment = "datum, kdy skončila platnost hodnosti"
+    start = Column(DateTime, comment = "počáteční datum, kdy osoba začala zastávat danou hodnost")
+    end = Column(DateTime, comment = "datum, kdy skončila platnost hodnosti")
 
     user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
     rankType_id = Column(ForeignKey("personalitiesranktypes.id"), index=True, comment="id hodnosti")
