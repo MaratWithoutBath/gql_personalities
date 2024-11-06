@@ -58,17 +58,17 @@ class RankModel(BaseModel):
     start = Column(DateTime, comment = "počáteční datum, kdy osoba začala zastávat danou hodnost")
     end = Column(DateTime, comment = "datum, kdy skončila platnost hodnosti")
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
     rankType_id = Column(ForeignKey("personalitiesranktypes.id"), index=True, comment="id hodnosti")
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="tvorba zaznamu")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="posledni zmena")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     #user = relationship("UserModel", back_populates="ranks", foreign_keys=[user_id])
-    rankType = relationship("RankTypeModel", back_populates="rank", comment="horní vazba typu hodnosti")
+    rankType = relationship("RankTypeModel", back_populates="rank")
 
 
 class RankTypeModel(BaseModel):
@@ -80,11 +80,11 @@ class RankTypeModel(BaseModel):
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="datum vytvoření")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="datum poslední změny")
-    changedby = UUIDFKey(nullable=True), comment="změneno kým"#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
-    rank = relationship("RankModel", back_populates="rankType", comment="horní vazba na hodnost")
+    rank = relationship("RankModel", back_populates="rankType")
 
 
 class StudyModel(BaseModel):
@@ -97,13 +97,13 @@ class StudyModel(BaseModel):
     start = Column(DateTime, comment="začátek studia")
     end = Column(DateTime, comment="konec studia")
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     #user = relationship("UserModel", back_populates="studies", foreign_keys=[user_id])
 
@@ -116,17 +116,17 @@ class CertificateModel(BaseModel):
     validity_start = Column(DateTime, comment="platnost od")
     validity_end = Column(DateTime, comment="platnost do")
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
     certificateType_id = Column(ForeignKey("personalitiescertificatetypes.id"), index=True, comment="id typu certifikátu")
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
    
     #user = relationship("UserModel", back_populates="certificates", foreign_keys=[user_id])
-    certificateType = relationship("CertificateTypeModel", back_populates="certificates", comment="horní vazba na typ certifikátu")
+    certificateType = relationship("CertificateTypeModel", back_populates="certificates")
 
 
 class CertificateTypeModel(BaseModel):
@@ -141,16 +141,16 @@ class CertificateTypeModel(BaseModel):
         comment="id skupiny certifikátů",
     )
 
-    certificates = relationship("CertificateModel", back_populates="certificateType", comment="horní vazba na certifikát")
+    certificates = relationship("CertificateModel", back_populates="certificateType")
     certificateTypeGroup = relationship(
-        "CertificateTypeGroupModel", back_populates="certificateType", comment="horní vazba na skupinu certifikátů"
+        "CertificateTypeGroupModel", back_populates="certificateType"
     )
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
 class CertificateTypeGroupModel(BaseModel):
     __tablename__ = "personalitiescertificatecategories"
@@ -161,12 +161,12 @@ class CertificateTypeGroupModel(BaseModel):
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     certificateType = relationship(
-        "CertificateTypeModel", back_populates="certificateTypeGroup", comment="horní vazba na typ certifikátu"
+        "CertificateTypeModel", back_populates="certificateTypeGroup"
     )
 
 
@@ -176,17 +176,17 @@ class MedalModel(BaseModel):
     id = UUIDColumn()
     year = Column(Integer, comment="rok udělení")
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"), index=True)
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
     medalType_id = Column(ForeignKey("personalitiesmedaltypes.id"), index=True, comment="id typu medaile")
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     #user = relationship("UserModel", back_populates="medals", foreign_keys=[user_id])
-    medalType = relationship("MedalTypeModel", back_populates="medal", comment="horní vazba na typ medaile")
+    medalType = relationship("MedalTypeModel", back_populates="medal")
 
 
 class MedalTypeModel(BaseModel):
@@ -200,12 +200,12 @@ class MedalTypeModel(BaseModel):
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="naposledy změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
-    medal = relationship("MedalModel", back_populates="medalType", comment="medaile")
-    medalTypeGroup = relationship("MedalTypeGroupModel", back_populates="medalTypes", comment="horní vazba na skupinu medailí")
+    medal = relationship("MedalModel", back_populates="medalType")
+    medalTypeGroup = relationship("MedalTypeGroupModel", back_populates="medalTypes")
 
 
 class MedalTypeGroupModel(BaseModel):
@@ -217,11 +217,11 @@ class MedalTypeGroupModel(BaseModel):
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
-    medalTypes = relationship("MedalTypeModel", back_populates="medalTypeGroup", comment="horní vazba na typ medaile")
+    medalTypes = relationship("MedalTypeModel", back_populates="medalTypeGroup")
 
 
 class WorkHistoryModel(BaseModel):
@@ -233,13 +233,13 @@ class WorkHistoryModel(BaseModel):
     name = Column(String, comment="název zaměstnavatele")
     ico = Column(String, comment="IČO zaměstnavatele")
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"))
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"))
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     #user = relationship("UserModel", back_populates="workHistories", foreign_keys=[user_id])
 
@@ -251,13 +251,13 @@ class RelatedDocModel(BaseModel):
     name = Column(String, comment="název dokumentu")
     # doc_upload
 
-    user_id = UUIDFKey(nullable=True, comment="id uživatele")#Column(ForeignKey("users.id"))
+    user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"))
 
     created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
-    changedby = UUIDFKey(nullable=True, comment="změněno kým")#Column(ForeignKey("users.id"), index=True, nullable=True)
-    createby = UUIDFKey(nullable=True, comment="vytvořeno kým")
-    rbacobject_id = Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
+    changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
+    createby = UUIDFKey(nullable=True)
+    rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
     #user = relationship("UserModel", back_populates="relatedDocs", foreign_keys=[user_id])
 
