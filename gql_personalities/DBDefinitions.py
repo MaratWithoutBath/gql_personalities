@@ -99,7 +99,7 @@ class StudyModel(BaseModel):
 
     user_id = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True)
 
-    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="vytvořeno")
+    created = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="datum vytvoření")
     lastchange = Column(DateTime, server_default=sqlalchemy.sql.func.now(), comment="naposledy změněno")
     changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
     createby = UUIDFKey(nullable=True)
