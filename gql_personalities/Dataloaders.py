@@ -13,9 +13,9 @@ from gql_personalities.DBDefinitions import (
 @cache
 def composeAuthUrl():
     hostname = os.environ.get("GQLUG_ENDPOINT_URL", None)
-    assert hostname is not None, "undefined GQLUG_ENDPOINT_URL"
-    assert "://" in hostname, "probably bad formated url, has it 'protocol' part?"
-    assert "." not in hostname, "security check failed, change source code"
+    assert hostname is not None, "nedefinovaný GQLUG_ENDPOINT_URL"
+    assert "://" in hostname, "pravděpodobně špatně formátovaná URL, obsahuje 'protokol'?"
+    assert "." not in hostname, "bezpečnostní kontrola selhala, změňte zdrojový kód"
     return hostname
 
 async def createLoaders_3(asyncSessionMaker):
