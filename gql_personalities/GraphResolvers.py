@@ -1,5 +1,5 @@
 from ast import Call
-from typing import Coroutine, Callable, Awaitable, Union, List
+from typing import Coroutine, Callable, Awaitable, Union, List, Type, Optional
 import uuid
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload, joinedload
@@ -10,7 +10,7 @@ from uoishelpers.resolvers import (
     createEntityByIdGetter,
     createEntityGetter,
     createInsertResolver,
-    createUpdateResolver,
+    createUpdateResolver
 )
 from uoishelpers.resolvers import putSingleEntityToDb
 
@@ -62,17 +62,19 @@ resolveWorkHistoriesForUser = create1NGetter(WorkHistoryModel, foreignKeyName="u
 resolveRelatedDocsForUser = create1NGetter(RelatedDocModel, foreignKeyName="user_id")
 
 # rank resolvers
+# rank resolvers
 resolveRankById = createEntityByIdGetter(RankModel)
 resolveRankAll = createEntityGetter(RankModel)
 resolverUpdateRank = createUpdateResolver(RankModel)
 resolveInsertRank = createInsertResolver(RankModel)
-
+# resolveDeleteRank = createDeleteResolver(RankModel)
+# rankType resolvers
 # rankType resolvers
 resolveRankTypeById = createEntityByIdGetter(RankTypeModel)
 resolveRankTypeAll = createEntityGetter(RankTypeModel)
 resolverUpdateRankType = createUpdateResolver(RankTypeModel)
 resolveInsertRankType = createInsertResolver(RankTypeModel)
-
+# resolveDeleteRankType = createDeleteResolver(RankTypeModel)
 
 async def resolveRankTypeByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
@@ -88,11 +90,12 @@ async def resolveRankTypeByThreeLetters(
 
 
 # study resolvers
+# study resolvers
 resolveStudyById = createEntityByIdGetter(StudyModel)
 resolveStudyAll = createEntityGetter(StudyModel)
 resolverUpdateStudy = createUpdateResolver(StudyModel)
 resolveInsertStudy = createInsertResolver(StudyModel)
-
+# resolveDeleteStudy = createDeleteResolver(StudyModel)
 
 async def resolveStudyByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
@@ -110,18 +113,20 @@ async def resolveStudyByThreeLetters(
 
 
 # certificate resolvers
+# certificate resolvers
 resolveCertificateById = createEntityByIdGetter(CertificateModel)
 resolveCertificateAll = createEntityGetter(CertificateModel)
 resolverUpdateCertificate = createUpdateResolver(CertificateModel)
 resolveInsertCertificate = createInsertResolver(CertificateModel)
+# resolveDeleteCertificate = createDeleteResolver(CertificateModel)
 
-
+# certificateType resolvers
 # certificateType resolvers
 resolveCertificateTypeById = createEntityByIdGetter(CertificateTypeModel)
 resolveCertificateTypeAll = createEntityGetter(CertificateTypeModel)
 resolverUpdateCertificateType = createUpdateResolver(CertificateTypeModel)
 resolveInsertCertificateType = createInsertResolver(CertificateTypeModel)
-
+# resolveDeleteCertificateType = createDeleteResolver(CertificateTypeModel)
 
 async def resolveCertificateTypeByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
@@ -159,18 +164,20 @@ async def resolveCertificateTypeGroupByThreeLetters(
 
 
 # medal resolvers
+# medal resolvers
 resolveMedalById = createEntityByIdGetter(MedalModel)
 resolveMedalAll = createEntityGetter(MedalModel)
 resolverUpdateMedal = createUpdateResolver(MedalModel)
 resolveInsertMedal = createInsertResolver(MedalModel)
+# resolveDeleteMedal = createDeleteResolver(MedalModel)
 
-
+# medalType resolvers
 # medalType resolvers
 resolveMedalTypeById = createEntityByIdGetter(MedalTypeModel)
 resolveMedalTypeAll = createEntityGetter(MedalTypeModel)
 resolverUpdateMedalType = createUpdateResolver(MedalTypeModel)
 resolveInsertMedalType = createInsertResolver(MedalTypeModel)
-
+# resolveDeleteMedalType = createDeleteResolver(MedalTypeModel)
 
 async def resolveMedalTypeByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
@@ -206,15 +213,16 @@ async def resolveMedalTypeGroupByThreeLetters(
 
 
 # workHistory resolvers
+# workHistory resolvers
 resolveWorkHistoryById = createEntityByIdGetter(WorkHistoryModel)
 resolveWorkHistoryAll = createEntityGetter(WorkHistoryModel)
 resolverUpdateWorkHistory = createUpdateResolver(WorkHistoryModel)
 resolveInsertWorkHistory = createInsertResolver(WorkHistoryModel)
-
+# resolveDeleteWorkHistory = createDeleteResolver(WorkHistoryModel)
 
 async def resolveWorkHistoryByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
-) -> List[WorkHistoryModel]:
+) -> List[Optional[WorkHistoryModel]]:
     if len(letters) < 3:
         return []
     stmt = select(WorkHistoryModel).where(WorkHistoryModel.name.like(f"%{letters}%"))
@@ -226,11 +234,12 @@ async def resolveWorkHistoryByThreeLetters(
 
 
 # relatedDoc resolvers
+# relatedDoc resolvers
 resolveRelatedDocById = createEntityByIdGetter(RelatedDocModel)
 resolveRelatedDocAll = createEntityGetter(RelatedDocModel)
 resolverUpdateRelatedDoc = createUpdateResolver(RelatedDocModel)
 resolveInsertRelatedDoc = createInsertResolver(RelatedDocModel)
-
+# resolveDeleteRelatedDoc = createDeleteResolver(RelatedDocModel)
 
 async def resolveRelatecDocByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
