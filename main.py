@@ -2,9 +2,11 @@ from typing import List
 import typing
 
 import asyncio
+import os
 
 from fastapi import FastAPI
 import strawberry
+from fastapi.responses import FileResponse
 from strawberry.fastapi import GraphQLRouter
 
 ## Definice GraphQL typu (pomoci strawberry https://strawberry.rocks/)
@@ -111,6 +113,11 @@ app.mount("/gql", graphql_app)
 async def startup_event():
     initizalizedEngine = await RunOnceAndReturnSessionMaker()
     return None
+
+@app.get("/voyager", response_class=FileResponse)
+async def graphigq():
+    realpath = os.path.realpath("./voyager.html")
+    return realpath
 
 
 print("All initialization is done")
