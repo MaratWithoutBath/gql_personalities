@@ -36,3 +36,5 @@ docker-compose up
 <br/><br/>
 
 pytest --cov-report term-missing --cov=gql_granting tests
+
+uvicorn main:app --env-file environment.txt
