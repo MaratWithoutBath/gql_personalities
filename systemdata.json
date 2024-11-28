@@ -105,13 +105,32 @@
             "name_en": "General of the Army (GA)",
             "id": "9234d06c-e811-4016-8ee5-f6975b4048a4"
         }
+    ],
+
+    "personalitiescertificatecategories":
+    [
+        {
+            "name": "jazykové",
+            "name_en": "language",
+            "id": "db9ba8c3-3d6e-4190-bfe7-d401586dd282"
+        },
+        {
+            "name": "vědecké",
+            "name_en": "science",
+            "id": "bc988cb6-38a7-45a1-97ec-d1e220621355"
+        },
+        {
+            "name": "sportovní",
+            "name_en": "sport",
+            "id": "3f1351ca-0624-43bb-9c93-23e6478fb1c1"
+        },
+        {
+            "name": "pracovní",
+            "name_en": "work",
+            "id": "e4713dd6-69e6-4d35-964b-1bca141899eb"
+        }
+
+
     ]
-
-    
-
-    
-
-
-
     
 }
