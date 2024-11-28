@@ -108,6 +108,15 @@ graphql_app = MyGraphQL(schema, graphiql=True, allow_queries_via_get=True)
 app = FastAPI()
 app.mount("/gql", graphql_app)
 
+def gql_context():
+    context = {}
+    return context
+
+graphql_app = GraphQLRouter(
+    schema,
+    context_getter=gql_context,
+)
+
 
 @app.on_event("startup")
 async def startup_event():
