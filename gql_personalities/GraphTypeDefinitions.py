@@ -630,7 +630,8 @@ class Query:
 from uoishelpers.schema import WhoAmIExtension
 
 schema = strawberryA.federation.Schema(
-    Query,
+    query=Query,
+    # mutation=Mutation,
     types=(UserGQLModel,),
-    extensions=(WhoAmIExtension),
+    extensions=[WhoAmIExtension],
 )
