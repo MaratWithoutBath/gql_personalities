@@ -663,8 +663,8 @@ def get_demodata():
 
 async def initDB(asyncSessionMaker):
 
-    defaultNoDemo = "False"
-    if defaultNoDemo == os.environ.get("DEMO", defaultNoDemo):
+    defaultNoDemo = os.environ.get("DEMO", None) not in ["True", "true", "1"]
+    if defaultNoDemo:
         dbModels = [
             CertificateTypeGroupModel,
             CertificateTypeModel, 
@@ -690,4 +690,5 @@ async def initDB(asyncSessionMaker):
 
     jsonData = get_demodata()
     await ImportModels(asyncSessionMaker, dbModels, jsonData)
+    print("DB initialized", flush=True)
     pass
