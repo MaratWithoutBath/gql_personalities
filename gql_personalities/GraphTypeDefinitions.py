@@ -627,5 +627,10 @@ class Query:
 # dostupne rozsireni, ktere tento prvek federace implementuje.
 #
 ###########################################################################################################################
+from uoishelpers.schema import WhoAmIExtension
 
-schema = strawberryA.federation.Schema(Query, types=(UserGQLModel,))
+schema = strawberryA.federation.Schema(
+    Query,
+    types=(UserGQLModel,),
+    extensions=(WhoAmIExtension),
+)
