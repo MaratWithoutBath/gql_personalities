@@ -377,7 +377,23 @@
             "id": "36e1bc46-472c-4d43-b272-1fb994d581c6"
         }
 
+    ],
+
+    "personalitiesmedalcategories": [
+        {
+            "name": "Řády a vyznamenání České republiky",
+            "id": "0747704c-d6f9-461c-9b2f-4b9681bd50ed"
+        },
+        {
+            "name": "Vojenské resortní vyznamenání",
+            "id": "2c34f055-d2fa-4eb1-a29a-ed28a2277e6c"
+        },
+        {"name": "Čestné odznaky", "id": "6299630e-4d27-44a9-a844-53831add33ca"}
+
+
     ]
+
+
 
     
 
