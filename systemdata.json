@@ -377,10 +377,27 @@
             "id": "36e1bc46-472c-4d43-b272-1fb994d581c6"
         }
 
+    ],
+    "personalitiesworkhistories": [
+        {
+            "name": "TechCorp",
+            "ico": "12345678",
+            "id": "a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6"
+        },
+        {
+            "name": "BizSolutions",
+            "ico": "87654321",
+            "id": "d6c5b4a3-2f1e-0d9c-8b7a-6e5f4d3c2b1a"
+        }
+    ],
+    "personalitiesrelateddocs": [
+        {
+            "name": "Dokument A",
+            "id": "f1e2d3c4-b5a6-7c8d-9e0f-1a2b3c4d5e6f"
+        },
+        {
+            "name": "Dokument B",
+            "id": "6e5d4c3b-2a1f-0e9d-8c7b-6a5f4d3c2b1a"
+        }
     ]
-
-    
-
-
-    
 }
