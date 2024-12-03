@@ -89,6 +89,18 @@ class UserGQLModel:
 
 from gql_personalities.GraphResolvers import resolveRankAll, resolveRankById
 
+class RankInsertGQLModel:
+    # Define the fields for RankInsertGQLModel
+    id: strawberryA.ID
+    start: strawberryA.ID
+    end: strawberryA.ID
+
+class RankUpdateGQLModel:
+    # Define the fields for RankUpdateGQLModel
+    id: strawberryA.ID
+    start: Union[strawberryA.ID, None] = None
+    end: Union[strawberryA.ID, None] = None
+
 
 @strawberryA.federation.type(keys=["id"], description="""Entity representing a rank""")
 class RankGQLModel:
@@ -617,6 +629,62 @@ class Query:
         async with withInfo(info) as session:
             result = await resolveRelatedDocAll(session, skip, limit)
             return result
+        
+###########################################################################################################################
+#
+# Tady tvoř CUD operace
+# 
+#
+###########################################################################################################################
+        
+from uoishelpers.gqlpermissions import (
+    OnlyForAuthentized,
+    SimpleInsertPermission, 
+    SimpleUpdatePermission, 
+    SimpleDeletePermission
+)    
+from uoishelpers.resolvers import (
+    getLoadersFromInfo, 
+    createInputs,
+
+    InsertError, 
+    Insert, 
+    UpdateError, 
+    Update, 
+    DeleteError, 
+    Delete
+)
+
+
+@strawberryA.type(description="""Type for mutation root""")
+class Mutation:
+    #@strawberryA.field(
+    #    description="""Inserts a rank""",
+    #    permission_classes=[
+    #        OnlyForAuthentized
+    #    ])
+    #async def rank_insert(
+    #    self, info: strawberryA.types.Info, rank: RankInsertGQLModel) -> typing.Union["RankGQLModel", InsertError["RankGQLModel"]]:
+    #    return await Insert[RankGQLModel].DoItSafeWay(info=info, entity=rank)
+
+    @strawberryA.field(
+        description="""Updates the rank""",
+        permission_classes=[
+            OnlyForAuthentized
+        ])
+    async def rank_update(
+        self, info: strawberryA.types.Info, rank: RankUpdateGQLModel) -> typing.Union["RankGQLModel", UpdateError["RankGQLModel"]]:
+        return await Update[RankGQLModel].DoItSafeWay(info=info, entity=rank)
+
+    @strawberryA.field(
+        description="""Delete the rank""",
+        permission_classes=[
+            OnlyForAuthentized
+        ]
+        )
+    async def rank_delete(
+        self, info: strawberryA.types.Info, rank: RankUpdateGQLModel) -> typing.Optional[UpdateError["RankGQLModel"]]:
+        return await Update[RankGQLModel].DoItSafeWay(info=info, entity=rank)
 
 
 ###########################################################################################################################
@@ -631,7 +699,7 @@ from uoishelpers.schema import WhoAmIExtension
 
 schema = strawberryA.federation.Schema(
     query=Query,
-    # mutation=Mutation,
+    mutation=Mutation,
     types=(UserGQLModel,),
     extensions=[WhoAmIExtension],
 )
