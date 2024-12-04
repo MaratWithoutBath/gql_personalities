@@ -3,6 +3,7 @@ import typing
 import strawberry as strawberryA
 import uuid
 from contextlib import asynccontextmanager
+import datetime
 
 
 @asynccontextmanager
@@ -89,17 +90,21 @@ class UserGQLModel:
 
 from gql_personalities.GraphResolvers import resolveRankAll, resolveRankById
 
+@strawberryA.input(description="dopsat")
 class RankInsertGQLModel:
     # Define the fields for RankInsertGQLModel
     id: strawberryA.ID
-    start: strawberryA.ID
-    end: strawberryA.ID
+    start: datetime.datetime
+    end: datetime.datetime
+    rankType_id: strawberryA.ID
 
+@strawberryA.input(description="dopsat")
 class RankUpdateGQLModel:
     # Define the fields for RankUpdateGQLModel
     id: strawberryA.ID
-    start: Union[strawberryA.ID, None] = None
-    end: Union[strawberryA.ID, None] = None
+    start: datetime.datetime
+    end: datetime.datetime
+    rankType_id: strawberryA.ID
 
 
 @strawberryA.federation.type(keys=["id"], description="""Entity representing a rank""")
