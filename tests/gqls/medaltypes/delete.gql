@@ -1,0 +1,8 @@
+mutation medalTypeDelete($id: UUID!, $lastchange: DateTime!) {
+  medalTypeDelete(medalType: {id: $id, lastchange: $lastchange}) {
+    __typename
+    ... on  MedalTypeGQLModelDeleteError{
+      msg
+    }
+  }
+}

@@ -1,0 +1,15 @@
+query GetCertificatePage($where: CertificateInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  certificatePage(where: $where, skip: $skip, limit: $limit) {
+    ...CertificateFields
+  }
+}
+
+fragment CertificateFields on CertificateGQLModel {
+  id
+  level
+  validityStart
+  validityEnd
+  certificateType {
+    ...CertificateTypeFields
+  }
+}

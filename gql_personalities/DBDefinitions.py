@@ -152,7 +152,7 @@ class CertificateTypeModel(BaseModel):
     createby = UUIDFKey(nullable=True)
     rbacobject_id = UUIDFKey(nullable=True)#Column(ForeignKey("rbacobjects.id"), index=True, nullable=True, comment="id objektu v RBAC")
 
-class CertificateTypeGroupModel(BaseModel):
+class CertificateCategoryModel(BaseModel):
     __tablename__ = "personalitiescertificatecategories"
 
     id = UUIDColumn()

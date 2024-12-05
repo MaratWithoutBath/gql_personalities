@@ -1,0 +1,18 @@
+mutation UpdateMedalType($id: UUID!, $lastchange: DateTime!, $name: String!, $name_en: String, $medal_category_id: UUID) {
+  medalTypeUpdate(medalType: {id: $id, lastchange: $lastchange, name: $name, nameEn: $name_en, medalTypeGroupId: $medal_category_id}) {
+    __typename
+    ... on MedalTypeGQLModel {
+      id
+      name
+      nameEn
+      lastchange
+      medalTypeGroup {
+        id
+        name
+      }
+    }
+    ... on  MedalTypeGQLModelUpdateError{
+      msg
+    }
+  }
+}

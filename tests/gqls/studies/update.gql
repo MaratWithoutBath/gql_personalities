@@ -1,0 +1,16 @@
+mutation UpdateStudy($entity: StudyUpdateInput!) {
+  updateStudy(entity: $entity) {
+    __typename
+    ... on StudyGQLModel {
+      id
+      name
+      nameEn
+      program
+      start
+      end
+    }
+    ... on UpdateError {
+      errorMessage
+    }
+  }
+}

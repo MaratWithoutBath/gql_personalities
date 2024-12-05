@@ -32,7 +32,7 @@ from gql_personalities.DBDefinitions import (
     RelatedDocModel,
 )
 from gql_personalities.DBDefinitions import RankTypeModel, CertificateTypeModel, MedalTypeModel
-from gql_personalities.DBDefinitions import CertificateTypeGroupModel, MedalTypeGroupModel
+from gql_personalities.DBDefinitions import CertificateCategoryModel, MedalTypeGroupModel
 
 
 ###########################################################################################################################
@@ -142,19 +142,19 @@ async def resolveCertificateTypeByThreeLetters(
 
 
 # certificateTypeGroup resolvers
-resolveCertificateTypeGroupById = createEntityByIdGetter(CertificateTypeGroupModel)
-resolveCertificateTypeGroupAll = createEntityGetter(CertificateTypeGroupModel)
-resolverUpdateCertificateTypeGroup = createUpdateResolver(CertificateTypeGroupModel)
-resolveInsertCertificateTypeGroup = createInsertResolver(CertificateTypeGroupModel)
+resolveCertificateTypeGroupById = createEntityByIdGetter(CertificateCategoryModel)
+resolveCertificateTypeGroupAll = createEntityGetter(CertificateCategoryModel)
+resolverUpdateCertificateTypeGroup = createUpdateResolver(CertificateCategoryModel)
+resolveInsertCertificateTypeGroup = createInsertResolver(CertificateCategoryModel)
 
 
 async def resolveCertificateTypeGroupByThreeLetters(
     session: AsyncSession, validity=None, letters: str = ""
-) -> List[CertificateTypeGroupModel]:
+) -> List[CertificateCategoryModel]:
     if len(letters) < 3:
         return []
-    stmt = select(CertificateTypeGroupModel).where(
-        CertificateTypeGroupModel.name.like(f"%{letters}%")
+    stmt = select(CertificateCategoryModel).where(
+        CertificateCategoryModel.name.like(f"%{letters}%")
     )
     if validity is not None:
         stmt = stmt.filter_by(valid=True)

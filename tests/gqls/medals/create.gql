@@ -1,0 +1,16 @@
+mutation   medalInsert($id: UUID, $startdate: DateTime!, $user_id: UUID!, $medal_type_id: UUID!) {
+    medalInsert(medal: {id: $id, startdate: $startdate, userId: $user_id, medalTypeId: $medal_type_id}) {
+    __typename
+    ...Medal
+    ... on InsertError {
+      msg
+    }
+  }
+}
+
+fragment Medal on MedalGQLModel {
+  id
+  lastchange
+  created
+  
+}

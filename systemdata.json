@@ -1,9 +1,164 @@
 {
-    "personalitiesranktypes":[
+    "workHistoryPositions": [
+        {"name": "manažer", "id": "3406c765-8454-4f3a-b3bb-76b74582be2e"},
+        {"name": "účetní", "id": "d9a50a22-edf4-4264-98f0-5a9eced115c4"},
+        {"name": "úředník", "id": "203cb4d1-6d61-4dfd-8662-d7a352db739c"},
+        {"name": "konzultant", "id": "7925ca15-acd5-4af9-9731-2884c8225081"},
+        {"name": "asistent", "id": "fd8ea6b7-4706-4537-8569-5dc8040519f8"},
+        {"name": "právní zástupce", "id": "242a84a8-f754-4136-b322-e20b0382dff4"},
+        {"name": "administrátor", "id": "cc3f7106-f38c-48ee-89d9-d1a420e45df5"},
+        {"name": "pokladní", "id": "950d3466-af5b-4a59-b91f-14514bf693d0"},
+        {"name": "uklízeč", "id": "c24dba24-b636-46d4-b0b2-2dc03e6af933"},
+        {"name": "operátor", "id": "02addd4f-ee6f-4141-bbc7-5a6ca9bc8647"},
+        {"name": "analytik", "id": "aaea9b89-dbed-42a2-8f22-737ce913f803"},
+        {"name": "správce", "id": "87897e28-c92d-49be-8878-e9c39c9b8a5a"},
+        {"name": "technická podpora", "id": "f60e38af-069b-4f8e-8cc9-b6cd077a7cee"},
+        {"name": "řidič", "id": "c11f1606-bdd2-4973-89ca-1489e8249c0f"},
+        {"name": "specialista", "id": "8b18a1a2-f759-4441-a18b-0bee41e71519"}
+    ],
+    "studyPlaces": [
+        
         {
+            "name": "Akademie múzických umění v Praze (AMU)",
+            "id": "88556487-cbf0-46ec-889a-71720b93ea37"
+        },
+        {
+            "name": "Akademie výtvarných umění v Praze (AVU)",
+            "id": "2b84e0ab-fe7b-4104-8601-4553caa0f83d"
+        },
+        {
+            "name": "Česká zemědělská univerzita v Praze (ČZU)",
+            "id": "db8a49b1-5c1d-4681-b964-8a32db02c0a0"
+        },
+        {
+            "name": "České vysoké učení technické v Praze (ČVUT)",
+            "id": "635135dc-f119-4a1c-88dd-f5fc8395f501"
+        },
+        {
+            "name": "Janáčkova akademie múzických umění (JAMU)",
+            "id": "10f191ae-284f-44ed-90ce-29b3cdadc070"
+        },
+        {
+            "name": "Jihočeská univerzita v Českých Budějovicích (JU)",
+            "id": "4bdb5ce2-ad70-4c2b-9ba5-516d3df3fb3b"
+        },
+        {
+            "name": "Masarykova univerzita (MU)",
+            "id": "782e1ee1-9f15-46bd-8e74-3e546c9afd37"
+        },
+        {
+            "name": "Mendelova univerzita v Brně (MENDELU)",
+            "id": "258f8f4e-a7f2-418f-bdd9-cfbbf8f38099"
+        },
+        {
+            "name": "Ostravská univerzita (OU)",
+            "id": "0a9d1130-5bc2-4de2-92a1-8c1be055e707"
+        },
+        {
+            "name": "Slezská univerzita v Opavě (SU)",
+            "id": "d51f4119-0918-4427-ad36-27818dc49bc3"
+        },
+        {
+            "name": "Technická univerzita v Liberci (TUL)",
+            "id": "6a059f6f-16d9-4cb8-94ac-084d6165a345"
+        },
+        {
+            "name": "Univerzita Hradec Králové (UHK)",
+            "id": "b8491178-53fd-4b6b-84cb-5cb8d859d489"
+        },
+        {
+            "name": "Univerzita Jana Evangelisty Purkyně v Ústí nad Labem (UJEP)",
+            "id": "236a2e9f-010c-443c-84e7-52973e8094fd"
+        },
+        {
+            "name": "Univerzita Karlova (UK)",
+            "id": "94115ab6-0443-473c-b66e-0c6d29572c89"
+        },
+        {
+            "name": "Univerzita Palackého v Olomouci (UP)",
+            "id": "e7e69091-982b-4f0c-80ad-a5bb074ef5bd"
+        },
+        {
+            "name": "Univerzita Pardubice (UPCE)",
+            "id": "c2886fd7-c3df-470a-9abc-25617e838453"
+        },
+        {
+            "name": "Univerzita Tomáše Bati ve Zlíně (UTB, zkrácený název: UTB ve Zlíně)",
+            "id": "533ed300-f78e-4f8e-abb1-7b039ff63438"
+        },
+        {
+            "name": "Veterinární univerzita Brno (VETUNI)",
+            "id": "a8f84591-d060-4763-8b95-890f5e9e9dc1"
+        },
+        {
+            "name": "Vysoká škola báňská - Technická univerzita Ostrava (VŠB-TUO, zkrácený název: VŠB - Technická univerzita Ostrava)",
+            "id": "c63b55eb-c6a0-4302-aa27-3ff8f082cc35"
+        },
+        {
+            "name": "Vysoká škola ekonomická v Praze (VŠE)",
+            "id": "b38fc480-98bd-4a9c-8b3f-58a0eff3506c"
+        },
+        {
+            "name": "Vysoká škola chemicko-technologická v Praze (VŠCHT Praha)",
+            "id": "cce2633e-a059-4b72-92d3-52652f6bc07c"
+        },
+        {
+            "name": "Vysoká škola polytechnická Jihlava (VŠPJ či VŠP Jihlava)",
+            "id": "9f128a38-6405-4435-a4f2-be7050755a2e"
+        },
+        {
+            "name": "Vysoká škola technická a ekonomická v Českých Budějovicích (VŠTE)",
+            "id": "8e1c2c35-50fd-40b6-9cd9-cad795f20dbf"
+        },
+        {
+            "name": "Vysoká škola uměleckoprůmyslová v Praze (UMPRUM)",
+            "id": "4c807453-dd9d-455f-a334-f4007f2bbefc"
+        },
+        {
+            "name": "Vysoké učení technické v Brně (VUT)",
+            "id": "4bb8f25a-79e5-493a-9b52-dbb2855537b8"
+        },
+        {
+            "name": "Západočeská univerzita v Plzni (ZČU)",
+            "id": "fbad1416-2f46-4671-927c-100be0914dcb"
+        },
+        
+        {
+            "name": "Policejní akademie České republiky v Praze (POLAC)",
+            "id": "31a7d00f-de73-4d70-9e02-a139d0a3096c"
+        },
+        {
+            "name": "Univerzita obrany (UNOB)",
+            "id": "3da845f7-a616-4ed9-98d8-329fac7fae81"
+        }
+    ],
+    "personalitiesranks": [
+        {
+            "id": "de5e6ae8-902c-4b06-aa8e-8fbca99026f3",
+            "start": "2015-05-01T10:30:00",
+            "end": "2020-05-01T10:30:00",
+            "user_id": "3b5e6c12-824c-456e-bb8c-893ac2bfbabc",
+            "rankType_id": "a17e81a6-776b-4883-a04d-cbd4f07ad095",
+            "created": "2015-05-01T10:30:00",
+            "lastchange": "2020-05-01T10:30:00",
+            "changedby_id": "8fbad6c7-456a-472c-bb2a-8743eb2bffce"
+        },
+        {
+            "id": "f3038058-e1fa-4f7c-9e50-7b1d99998d37",
+            "start": "2010-01-15T08:20:00",
+            "end": "2018-03-10T16:40:00",
+            "user_id": "4b8e93cd-824a-4d93-aba9-bb9ef3c44acd",
+            "rankType_id": "453dff9e-fab2-41d0-8bef-ca76c78e79c8",
+            "created": "2010-01-15T08:20:00",
+            "lastchange": "2018-03-10T16:40:00",
+            "changedby_id": "bfa456cb-88d2-46ac-80f1-c9f12c11ecda"
+        }
+    ],
+    "personalitiesranktypes": [
+        {
+            "id": "de5e6ae8-902c-4b06-aa8e-8fbca99026f3",
             "name": "vojín (voj.)",
-            "name_en": "Private (PVT)",
-            "id": "de5e6ae8-902c-4b06-aa8e-8fbca99026f3"
+            "name_en": "Private (PVT)"
         },
         {
             "name": "svobodník (svob.)",
@@ -26,7 +181,7 @@
             "name_en": "Staff Sergeant (SSG)",
             "id": "a9043224-9c3b-4562-a329-997fba9237d0"
         },
-       
+        
         {
             "name": "rotmistr (rtm.)",
             "name_en": "Sergeant First Class (SFC)",
@@ -68,7 +223,7 @@
             "name_en": "Captain (CPT)",
             "id": "a8ce2853-26ec-4e10-8bbe-899cc296a35f"
         },
-       
+        
         {
             "name": "major (mjr.)",
             "name_en": "Major (MAJ)",
@@ -106,13 +261,85 @@
             "id": "9234d06c-e811-4016-8ee5-f6975b4048a4"
         }
     ],
-
-    "personalitiescertificatecategories":
-    [
+    "personalitiesstudies": [
+        {
+            "id": "88556487-cbf0-46ec-889a-71720b93ea37",
+            "name": "Akademie múzických umění v Praze (AMU)",
+            "name_en": null,
+            "program": "bakalářský",
+            "startdate": "2012-09-01T00:00:00",
+            "enddate": "2016-06-15T00:00:00",
+            "user_id": "4b7e89d3-8c45-472c-bb4f-9a32fbac9d47"
+        },
+        {
+            "id": "94115ab6-0443-473c-b66e-0c6d29572c89",
+            "name": "Univerzita Karlova (UK)",
+            "name_en": null,
+            "program": "doktorský",
+            "startdate": "2010-09-01T00:00:00",
+            "enddate": "2015-06-15T00:00:00",
+            "user_id": "9b1e93fb-4c7e-41d3-bbe9-ea2c67b1e67a"
+        }
+    ],
+    "personalitiescertificatetypes": [
+        {
+            "id": "34a29ef9-b9a9-4d62-9270-e16504d47fa9",
+            "name": "STANAG English",
+            "name_en": null
+        },
+        {
+            "id": "6bc6e441-511c-403b-a754-50b8ccd9bfc3",
+            "name": "CPE",
+            "name_en": null
+        },
+        {
+            "name": "CAE", "id": "9ab4186a-1a23-4632-8dc5-8b6c7012c024"},
+        {
+            "name": "FCE", "id": "228ad8c0-8ef9-48ec-9ad1-fa9e9c123d50"},
+        {
+            "name": "TOEFL", "id": "87408450-922a-4f2e-84c5-3fd25255d738"},
+        {
+            "name": "IELTS", "id": "6c2b6c8f-812f-4372-bd10-1a395c7faf4b"},
+        {
+            "name": "TOEIC", "id": "9afba032-ed69-4d5c-bc73-805ae6eb156b"},
+        {
+            "name": "STANAG German", "id": "6b381e55-528e-4d13-85a2-963f0710e962"},
+        {
+            "name": "ZDaF", "id": "3139c891-e59e-4345-9f87-e7e93b22d686"},
+        {
+            "name": "ZMF", "id": "e1bd3e67-363d-4e46-b616-89f22d64468f"},
+        {
+            "name": "KDS", "id": "2f682b71-a772-4b55-8d30-2100844f5b53"},
+        {
+            "name": "GDS", "id": "37147540-e3ac-49b8-8ae0-2121f417b92f"},
+        {
+            "name": "PNDS", "id": "22bc21ab-5a87-448e-a0f4-74d0136678df"},
+        {
+            "name": "DSH", "id": "62c41d70-2757-4378-a7c0-e90bdb57a051"},
+        {
+            "name": "STANAG French", "id": "9c615240-f23e-4b6b-abf6-b10327742a1f"},
+        {
+            "name": "DELF", "id": "b6cedca1-38c7-470c-8688-caab5a102aa8"},
+        {
+            "name": "DALF", "id": "c1177873-7ef0-4e59-b24c-803d430d7541"},
+        {
+            "name": "STANAG Spanish", "id": "62aeac61-0c0a-4962-af06-9b32c375ad0b"},
+        {
+            "name": "DELE", "id": "c6275399-7302-49ca-837d-811f9238a5dc"},
+        {
+            "name": "STANAG Italian", "id": "49d71536-e9fb-4110-8639-a07ca653e6fb"},
+        {
+            "name": "CILS", "id": "e1a2c256-8e11-4a94-8bfb-4d564c4a892f"},
+        {
+            "name": "STANAG Russian", "id": "43089ad0-722c-4f13-9a89-c809b2e3ecee"},
+        {
+            "name": "STANAG Polish", "id": "634fe5b9-8494-4586-b67a-191157c0ed60"}
+    ],
+    "personalitiescertificatecategories": [
         {
             "name": "jazykové",
             "name_en": "language",
-            "id": "db9ba8c3-3d6e-4190-bfe7-d401586dd282"
+            "id": "3400df72-2c00-4b6a-8382-881450df3f9d"
         },
         {
             "name": "vědecké",
@@ -129,31 +356,27 @@
             "name_en": "work",
             "id": "e4713dd6-69e6-4d35-964b-1bca141899eb"
         }
-
     ],
 
-    "personalitiescertificatetypes": [
+    "personalitiesmedalcategories": [
         {
-            "name": "bakalářský",
-            "name_en": "bachelor",
-            "id": "00602448-9d42-4af3-95fd-20fd6a551771"
+            "id": "0747704c-d6f9-461c-9b2f-4b9681bd50ed",
+            "name": "Řády a vyznamenání České republiky",
+            "name_en": null
         },
         {
-            "name": "magisterský",
-            "name_en": "master",
-            "id": "f0e17944-e7d8-434a-9b36-b70cf6f0fac5"
+            "id": "2c34f055-d2fa-4eb1-a29a-ed28a2277e6c",
+            "name": "Vojenské resortní vyznamenání",
+            "name_en": null
         },
         {
-            "name": "doktorský",
-            "name_en": "doctoral",
-            "id": "0ea55a54-1fa5-43ce-b2e6-67ebf57c9671"
+            "name": "Čestné odznaky", 
+            "id": "6299630e-4d27-44a9-a844-53831add33ca"
         }
-
     ],
-
     "personalitiesmedaltypes": [
         {
-            "name": "Řád Bílého lva",
+            "name": "Řád Bílého lva", 
             "id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002"
         },
         {
@@ -161,21 +384,14 @@
             "id": "cf4c2ef4-6cf1-11ed-a1eb-0242ac120002"
         },
         {
-            "name": "Medaile za hrdinství",
-            "id": "cf4c3052-6cf1-11ed-a1eb-0242ac120002"
-        },
+            "name": "Medaile za hrdinství", "id": "cf4c3052-6cf1-11ed-a1eb-0242ac120002"},
         {
-            "name": "Medaile za zásluhy",
-            "id": "cf4c3188-6cf1-11ed-a1eb-0242ac120002"
-        },
+            "name": "Medaile za zásluhy", "id": "cf4c3188-6cf1-11ed-a1eb-0242ac120002"},
+        
         {
-            "name": "Záslužný kříž",
-            "id": "1ebfcc2a-6cf2-11ed-a1eb-0242ac120002"
-        },
+            "name": "Záslužný kříž", "id": "1ebfcc2a-6cf2-11ed-a1eb-0242ac120002"},
         {
-            "name": "Medaile za zranění",
-            "id": "1ebfcf2c-6cf2-11ed-a1eb-0242ac120002"
-        },
+            "name": "Medaile za zranění", "id": "1ebfcf2c-6cf2-11ed-a1eb-0242ac120002"},
         {
             "name": "Medaile ministra obrany za službu v zahraničí",
             "id": "1ebfd076-6cf2-11ed-a1eb-0242ac120002"
@@ -184,6 +400,7 @@
             "name": "Medaile Armády České republiky",
             "id": "1ebfd198-6cf2-11ed-a1eb-0242ac120002"
         },
+        
         {
             "name": "Čestný pamětní odznak za službu míru",
             "id": "97edb3fc-a4d2-4295-a8ca-e7e97fba87e1"
@@ -345,9 +562,7 @@
             "id": "bbbef578-0a80-4c81-a56b-a7b7ec6576f2"
         },
         {
-            "name": "Pamětní odznak KFOR",
-            "id": "efb084a0-7a87-464e-8ecd-7596fb9337c9"
-        },
+            "name": "Pamětní odznak KFOR", "id": "efb084a0-7a87-464e-8ecd-7596fb9337c9"},
         {
             "name": "Pamětní odznak veterinární základny Grabštejn",
             "id": "bf8af41c-ef71-43cb-9a69-fc7e01efccf7"
@@ -376,42 +591,23 @@
             "name": "Pamětní odznak Vojenské střední školy Vyškov",
             "id": "36e1bc46-472c-4d43-b272-1fb994d581c6"
         }
-
     ],
-
-    "personalitiesmedalcategories": [
+    "personalitiescertificates": [
         {
-            "name": "Řády a vyznamenání České republiky",
-            "id": "0747704c-d6f9-461c-9b2f-4b9681bd50ed"
-        },
-        {
-            "name": "Vojenské resortní vyznamenání",
-            "id": "2c34f055-d2fa-4eb1-a29a-ed28a2277e6c"
-        },
-        {"name": "Čestné odznaky", "id": "6299630e-4d27-44a9-a844-53831add33ca"}
-
-
-    ],
-    "personalitiesworkhistories": [
-        {
-            "name": "TechCorp",
-            "ico": "12345678",
-            "id": "a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6"
-        },
-        {
-            "name": "BizSolutions",
-            "ico": "87654321",
-            "id": "d6c5b4a3-2f1e-0d9c-8b7a-6e5f4d3c2b1a"
+            "id": "25a4283f-4be2-4c0b-9579-a42648b853d0",
+            "certificateType_id": "34a29ef9-b9a9-4d62-9270-e16504d47fa9",
+            "user_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "startdate": "2010-09-01T00:00:00",
+            "enddate": "2016-06-15T00:00:00",
+            "level": "3333"
         }
     ],
-    "personalitiesrelateddocs": [
+    "personalitiesmedals": [
         {
-            "name": "Dokument A",
-            "id": "f1e2d3c4-b5a6-7c8d-9e0f-1a2b3c4d5e6f"
-        },
-        {
-            "name": "Dokument B",
-            "id": "6e5d4c3b-2a1f-0e9d-8c7b-6a5f4d3c2b1a"
+            "id": "9956d676-e960-466a-8fb4-a48128b46003",
+            "medalType_id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002",
+            "user_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "startdate": "2010-09-01T00:00:00"
         }
     ]
 }

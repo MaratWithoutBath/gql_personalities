@@ -10,7 +10,7 @@ from gql_personalities.DBDefinitions import (
     CertificateTypeModel,
     MedalTypeModel,
     MedalTypeGroupModel,
-    CertificateTypeGroupModel,
+    CertificateCategoryModel
 )
 
 from functools import cache
@@ -647,16 +647,16 @@ async def initDB(asyncSessionMaker):
     defaultNoDemo = os.environ.get("DEMO", None) not in ["True", "true", "1"]
     if defaultNoDemo:
         dbModels = [
-            CertificateTypeGroupModel,
-            CertificateTypeModel,
+            CertificateCategoryModel,
+            CertificateTypeModel, 
             MedalTypeGroupModel,
             MedalTypeModel,
             RankTypeModel,
         ]
     else:
         dbModels = [
-            CertificateTypeGroupModel,
-            CertificateTypeModel,
+            CertificateCategoryModel,
+            CertificateTypeModel, 
             MedalTypeGroupModel,
             MedalTypeModel,
             RankTypeModel,

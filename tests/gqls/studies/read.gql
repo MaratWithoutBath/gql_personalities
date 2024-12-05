@@ -1,0 +1,14 @@
+query GetStudyById($id: UUID!) {
+  studyById(id: $id) {
+    ...StudyFields
+  }
+}
+
+fragment StudyFields on StudyGQLModel {
+  id
+  name
+  nameEn
+  program
+  start
+  end
+}

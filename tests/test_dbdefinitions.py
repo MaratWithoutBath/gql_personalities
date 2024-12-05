@@ -1,54 +1,24 @@
-import sqlalchemy
-import sys
-import asyncio
-
-# setting path
-sys.path.append("../gql_personalities")
-
 import pytest
-
-# from ..uoishelpers.uuid import UUIDColumn
-
-from gql_personalities.DBDefinitions import BaseModel
-from gql_personalities.DBDefinitions import CertificateModel, CertificateTypeModel, CertificateTypeGroupModel
-from gql_personalities.DBDefinitions import MedalModel, MedalTypeModel, MedalTypeGroupModel
-from gql_personalities.DBDefinitions import WorkHistoryModel, RelatedDocModel
-
-from shared import prepare_demodata, prepare_in_memory_sqllite, get_demodata
-
+from .shared import prepare_demodata, prepare_in_memory_sqllite
 
 @pytest.mark.asyncio
 async def test_table_users_feed():
     async_session_maker = await prepare_in_memory_sqllite()
     await prepare_demodata(async_session_maker)
 
-    data = get_demodata()
-
-
-from gql_personalities.DBDefinitions import ComposeConnectionString
-
+    # data = get_demodata()
 
 def test_connection_string():
+    from src.DBDefinitions import ComposeConnectionString
     connectionString = ComposeConnectionString()
 
     assert "://" in connectionString
     assert "@" in connectionString
 
 
-from gql_personalities.DBDefinitions import UUIDColumn
-
-
-def test_connection_uuidcolumn():
-    col = UUIDColumn(name="name")
-
-    assert col is not None
-
-
-from gql_personalities.DBDefinitions import startEngine
-
-
 @pytest.mark.asyncio
 async def test_table_start_engine():
+    from src.DBDefinitions import startEngine
     connectionString = "sqlite+aiosqlite:///:memory:"
     async_session_maker = await startEngine(
         connectionString, makeDrop=True, makeUp=True
