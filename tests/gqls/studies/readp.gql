@@ -1,0 +1,14 @@
+query GetStudyPage($where: StudyInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  studyPage(where: $where, skip: $skip, limit: $limit) {
+    ...StudyFields
+  }
+}
+
+fragment StudyFields on StudyGQLModel {
+  id
+  name
+  nameEn
+  program
+  start
+  end
+}

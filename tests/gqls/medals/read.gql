@@ -1,0 +1,5 @@
+query GetMedalById($id: UUID!) {
+  medalById(id: $id) {
+    ...MedalFields
+  }
+}

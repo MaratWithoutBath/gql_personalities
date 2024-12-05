@@ -1,0 +1,11 @@
+query GetMedalTypeGroupPage($where: MedalTypeGroupInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  medalTypeGroupPage(where: $where, skip: $skip, limit: $limit) {
+    ...MedalTypeGroupFields
+  }
+}
+
+fragment MedalTypeGroupFields on MedalTypeGroupGQLModel {
+  id
+  name
+  nameEn
+}

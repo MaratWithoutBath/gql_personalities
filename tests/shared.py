@@ -1,23 +1,13 @@
 import sqlalchemy
-import sys
 import asyncio
-
-# setting path
-sys.path.append("../gql_prersonalities")
-
 import pytest
-
-# from ..uoishelpers.uuid import UUIDColumn
-
-from gql_personalities.DBDefinitions import BaseModel
-from gql_personalities.DBDefinitions import CertificateModel, CertificateTypeModel, CertificateTypeGroupModel
-from gql_personalities.DBDefinitions import MedalModel, MedalTypeModel, MedalTypeGroupModel
-from gql_personalities.DBDefinitions import WorkHistoryModel, RelatedDocModel
 
 async def prepare_in_memory_sqllite():
     from sqlalchemy.ext.asyncio import create_async_engine
     from sqlalchemy.ext.asyncio import AsyncSession
     from sqlalchemy.orm import sessionmaker
+
+    from src.DBDefinitions import BaseModel
 
     asyncEngine = create_async_engine("sqlite+aiosqlite:///:memory:")
     # asyncEngine = create_async_engine("sqlite+aiosqlite:///data.sqlite")
@@ -30,9 +20,12 @@ async def prepare_in_memory_sqllite():
 
     return async_session_maker
 
-from gql_personalities.DBFeeder import get_demodata
 
 async def prepare_demodata(async_session_maker):
+    from src.DBFeeder import get_demodata
+    from src.DBDefinitions import FacilityModel, FacilityTypeModel
+    from src.DBDefinitions import EventFacilityModel, EventFacilityStateType
+
     data = get_demodata()
 
     from uoishelpers.feeders import ImportModels
@@ -40,18 +33,17 @@ async def prepare_demodata(async_session_maker):
     await ImportModels(
         async_session_maker,
         [
-            CertificateModel, CertificateTypeModel, CertificateTypeGroupModel,
-            MedalModel, MedalTypeModel, MedalTypeGroupModel,
-            WorkHistoryModel, RelatedDocModel
+            FacilityModel, 
+            FacilityTypeModel,
+            EventFacilityModel, 
+            EventFacilityStateType,            
         ],
         data,
     )
 
 
-from gql_personalities.Dataloaders import createLoaders_3
-
-
 async def createContext(asyncSessionMaker):
+    from Dataloaders import createLoaders_3
     return {
         "asyncSessionMaker": asyncSessionMaker,
         "all": await createLoaders_3(asyncSessionMaker),

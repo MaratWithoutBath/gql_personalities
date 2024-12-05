@@ -1,0 +1,17 @@
+mutation UpdateMedal($entity: MedalUpdateInput!) {
+  updateMedal(entity: $entity) {
+    __typename
+    ... on MedalGQLModel {
+      id
+      year
+      medalType {
+        id
+        name
+        nameEn
+      }
+    }
+    ... on UpdateError {
+      errorMessage
+    }
+  }
+}

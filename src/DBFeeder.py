@@ -1,5 +1,5 @@
 from functools import cache
-from gql_personalities.DBDefinitions import (
+from src.DBDefinitions import (
     
     RankModel,
     StudyModel,
@@ -10,7 +10,7 @@ from gql_personalities.DBDefinitions import (
     RankTypeModel, 
     CertificateTypeModel, 
     MedalTypeModel, 
-    MedalTypeGroupModel,
+    MedalCategoryModel,
     CertificateCategoryModel
 )
 
@@ -628,65 +628,35 @@ def determineWorkHistoryPosition():
     ]
     return workHistoryPosition
 
-
-# from gql_personalities.DBDefinitions import
-
-import asyncio
-
 import os
-import json
 from uoishelpers.feeders import ImportModels
-import datetime
-
-def get_demodata():
-    def datetime_parser(json_dict):
-        for (key, value) in json_dict.items():
-            if key in ["startdate", "enddate", "lastchange", "created"]:
-                if value is None:
-                    dateValueWOtzinfo = None
-                else:
-                    try:
-                        dateValue = datetime.datetime.fromisoformat(value)
-                        dateValueWOtzinfo = dateValue.replace(tzinfo=None)
-                    except:
-                        print("jsonconvert Error", key, value, flush=True)
-                        dateValueWOtzinfo = None
-                
-                json_dict[key] = dateValueWOtzinfo
-        return json_dict
+from uoishelpers.dataloaders import readJsonFile
 
 
-    with open("./systemdata.json", "r") as f:
-        jsonData = json.load(f, object_hook=datetime_parser)
 
-    return jsonData
+def get_demodata(filename="./systemdata.json"):
+    return readJsonFile(filename)
 
 async def initDB(asyncSessionMaker):
 
     defaultNoDemo = "False"
-    if defaultNoDemo == os.environ.get("DEMO", defaultNoDemo):
-        dbModels = [
-            CertificateCategoryModel,
-            CertificateTypeModel, 
-            MedalTypeGroupModel,
-            MedalTypeModel, 
-            RankTypeModel, 
-        ]
-    else:
-        dbModels = [
-            CertificateCategoryModel,
-            CertificateTypeModel, 
-            MedalTypeGroupModel,
-            MedalTypeModel, 
-            RankTypeModel, 
+    dbModels = [
+        CertificateCategoryModel,
+        CertificateTypeModel, 
+        MedalCategoryModel,
+        RankTypeModel, 
+        MedalTypeModel, 
+    ]
 
+    if os.environ.get("DEMO", defaultNoDemo) in [True, "true", "True"]:
+        dbModels.extend([
             RankModel,
             StudyModel,
             CertificateModel,
             MedalModel,
             WorkHistoryModel,
             RelatedDocModel
-        ]
+        ])
 
     jsonData = get_demodata()
     await ImportModels(asyncSessionMaker, dbModels, jsonData)

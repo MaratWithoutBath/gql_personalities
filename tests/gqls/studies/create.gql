@@ -1,0 +1,16 @@
+mutation InsertStudy($entity: StudyInsertInput!) {
+  insertStudy(entity: $entity) {
+    __typename
+    ... on StudyGQLModel {
+      id
+      name
+      nameEn
+      program
+      start
+      end
+    }
+    ... on InsertError {
+      errorMessage
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query GetCertificateTypeGroupPage($where: CertificateTypeGroupInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  certificateTypeGroupPage(where: $where, skip: $skip, limit: $limit) {
+    ...CertificateTypeGroupFields
+  }
+}
+
+fragment CertificateTypeGroupFields on CertificateTypeGroupGQLModel {
+  id
+  name
+  nameEn
+}

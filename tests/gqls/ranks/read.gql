@@ -1,0 +1,14 @@
+query GetRankById($id: UUID!) {
+  rankById(id: $id) {
+    ...RankFields
+  }
+}
+
+fragment RankFields on RankGQLModel {
+  id
+  start
+  end
+  rankType {
+    ...RankTypeFields
+  }
+}

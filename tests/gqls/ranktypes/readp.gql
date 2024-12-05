@@ -1,0 +1,11 @@
+query GetRankTypePage($where: RankTypeInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  rankTypePage(where: $where, skip: $skip, limit: $limit) {
+    ...RankTypeFields
+  }
+}
+
+fragment RankTypeFields on RankTypeGQLModel {
+  id
+  name
+  nameEn
+}

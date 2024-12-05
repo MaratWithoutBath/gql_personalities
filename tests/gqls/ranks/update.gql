@@ -1,0 +1,18 @@
+mutation UpdateRank($entity: RankUpdateInput!) {
+  updateRank(entity: $entity) {
+    __typename
+    ... on RankGQLModel {
+      id
+      start
+      end
+      rankType {
+        id
+        name
+        nameEn
+      }
+    }
+    ... on UpdateError {
+      errorMessage
+    }
+  }
+}

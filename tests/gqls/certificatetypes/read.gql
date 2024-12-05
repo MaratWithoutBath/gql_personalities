@@ -1,0 +1,5 @@
+query GetCertificateTypeById($id: UUID!) {
+  certificateTypeById(id: $id) {
+    ...CertificateTypeFields
+  }
+}

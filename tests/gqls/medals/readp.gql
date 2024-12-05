@@ -1,0 +1,5 @@
+query GetMedalPage($where: MedalInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  medalPage(where: $where, skip: $skip, limit: $limit) {
+    ...MedalFields
+  }
+}

@@ -1,0 +1,11 @@
+query GetCertificateTypeGroupById($id: UUID!) {
+  certificateTypeGroupById(id: $id) {
+    ...CertificateTypeGroupFields
+  }
+}
+
+fragment CertificateTypeGroupFields on CertificateTypeGroupGQLModel {
+  id
+  name
+  nameEn
+}

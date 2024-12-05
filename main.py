@@ -1,26 +1,52 @@
-from typing import List
-import typing
-
+import os
+import socket
 import asyncio
 
-from fastapi import FastAPI
-import strawberry
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI, Request, Response
+from fastapi.responses import JSONResponse, FileResponse
 from strawberry.fastapi import GraphQLRouter
+
+import logging
+import logging.handlers
+
+from src.GraphTypeDefinitions import schema
+from src.DBDefinitions import startEngine, ComposeConnectionString
+from src.DBFeeder import initDB
+
+# region logging setup
+
+logging.basicConfig(
+    level=logging.INFO, 
+    format='%(asctime)s.%(msecs)03d\t%(levelname)s:\t%(message)s', 
+    datefmt='%Y-%m-%dT%I:%M:%S')
+SYSLOGHOST = os.getenv("SYSLOGHOST", None)
+if SYSLOGHOST is not None:
+    [address, strport, *_] = SYSLOGHOST.split(':')
+    assert len(_) == 0, f"SYSLOGHOST {SYSLOGHOST} has unexpected structure, try `localhost:514` or similar (514 is UDP port)"
+    port = int(strport)
+    my_logger = logging.getLogger()
+    my_logger.setLevel(logging.INFO)
+    handler = logging.handlers.SysLogHandler(address=(address, port), socktype=socket.SOCK_DGRAM)
+    #handler = logging.handlers.SocketHandler('10.10.11.11', 611)
+    my_logger.addHandler(handler)
+
+# endregion
+
+# region DB setup
 
 ## Definice GraphQL typu (pomoci strawberry https://strawberry.rocks/)
 ## Strawberry zvoleno kvuli moznosti mit federovane GraphQL API (https://strawberry.rocks/docs/guides/federation, https://www.apollographql.com/docs/federation/)
-from gql_personalities.GraphTypeDefinitions import Query
-
 ## Definice DB typu (pomoci SQLAlchemy https://www.sqlalchemy.org/)
 ## SQLAlchemy zvoleno kvuli moznost komunikovat s DB asynchronne
 ## https://docs.sqlalchemy.org/en/14/core/future.html?highlight=select#sqlalchemy.future.select
-from gql_personalities.DBDefinitions import startEngine, ComposeConnectionString
+
 
 ## Zabezpecuje prvotni inicializaci DB a definovani Nahodne struktury pro "Univerzity"
 # from gql_workflow.DBFeeder import createSystemDataStructureRoleTypes, createSystemDataStructureGroupTypes
 
 connectionString = ComposeConnectionString()
-
 
 def singleCall(asyncFunc):
     """Dekorator, ktery dovoli, aby dekorovana funkce byla volana (vycislena) jen jednou. Navratova hodnota je zapamatovana a pri dalsich volanich vracena.
@@ -35,84 +61,78 @@ def singleCall(asyncFunc):
 
     return result
 
-
-from gql_personalities.DBFeeder import initDB
-
-
 @singleCall
 async def RunOnceAndReturnSessionMaker():
     """Provadi inicializaci asynchronniho db engine, inicializaci databaze a vraci asynchronni SessionMaker.
     Protoze je dekorovana, volani teto funkce se provede jen jednou a vystup se zapamatuje a vraci se pri dalsich volanich.
     """
-    print(f'starting engine for "{connectionString}"')
 
-    import os
-    makeDrop = os.environ.get("DEMO", "") == "true"
+    makeDrop = os.getenv("DEMO", None) == "True"
+    logging.info(f'starting engine for "{connectionString} makeDrop={makeDrop}"')
+
     result = await startEngine(
         connectionstring=connectionString, makeDrop=makeDrop, makeUp=True
-    )
-
-    print(f"initializing system structures")
+    )   
 
     ###########################################################################################################################
     #
     # zde definujte do funkce asyncio.gather
     # vlozte asynchronni funkce, ktere maji data uvest do prvotniho konzistentniho stavu
+    async def initDBAndReport():
+        logging.info(f"initializing system structures")
+        await initDB(result)
+        logging.info(f"all done")
+        print(f"all done")
+
+    # asyncio.create_task(coro=initDBAndReport())
+    await initDBAndReport()
     #
-    # sem lze dat vsechny funkce, ktere maji nejak inicializovat databazi
-    # musi byt asynchronniho typu (async def ...)
-    # await asyncio.gather( # concurency running :)
-    #    funcA(result),
-    #    funcB(result)
-    # )
-    #
-    # Pokud je potreba provest jen jednu funkci, lze to takto:
-    await initDB(result)
     #
     ###########################################################################################################################
-    print(f"all done")
+    
     return result
 
+# endregion
 
-from strawberry.asgi import GraphQL
+# region FastAPI setup
+async def get_context(request: Request):
+    asyncSessionMaker = await RunOnceAndReturnSessionMaker()
+        
+    from src.Dataloaders import createLoadersContext
+    context = createLoadersContext(asyncSessionMaker)
 
+    result = {**context}
+    result["request"] = request
+    return result
 
-class MyGraphQL(GraphQL):
-    """Rozsirena trida zabezpecujici praci se session"""
-
-    async def __call__(self, scope, receive, send):
-        asyncSessionMaker = await RunOnceAndReturnSessionMaker()
-        async with asyncSessionMaker() as session:
-            self._session = session
-            self._user = {"id": "?"}
-            return await GraphQL.__call__(self, scope, receive, send)
-
-    async def get_context(self, request, response):
-        parentResult = await GraphQL.get_context(self, request, response)
-        return {
-            **parentResult,
-            "session": self._session,
-            "asyncSessionMaker": await RunOnceAndReturnSessionMaker(),
-            "user": self._user,
-        }
-
-
-from gql_personalities.GraphTypeDefinitions import schema
-
-## ASGI app, kterou "moutneme"
-graphql_app = MyGraphQL(schema, graphiql=True, allow_queries_via_get=True)
-
-app = FastAPI()
-app.mount("/gql", graphql_app)
-
-
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     initizalizedEngine = await RunOnceAndReturnSessionMaker()
-    return None
+    yield
 
+app = FastAPI(lifespan=lifespan)
 
-print("All initialization is done")
+graphql_app = GraphQLRouter(
+    schema,
+    context_getter=get_context
+)
+
+app.include_router(graphql_app, prefix="/gql")
+
+@app.get("/voyager", response_class=FileResponse)
+async def graphiql():
+    realpath = os.path.realpath("./voyager.html")
+    return realpath
+
+import prometheus_client
+@app.get("/metrics")
+async def metrics():
+    return Response(
+        content=prometheus_client.generate_latest(), 
+        media_type=prometheus_client.CONTENT_TYPE_LATEST
+        )
+
+logging.info("All initialization is done")
 
 # @app.get('/hello')
 # def hello():
@@ -123,3 +143,45 @@ print("All initialization is done")
 # pokud jste pripraveni testovat GQL funkcionalitu, rozsirte apollo/server.js
 #
 ###########################################################################################################################
+# endregion
+
+# region ENV setup tests
+def envAssertDefined(name, default=None):
+    result = os.getenv(name, None)
+    assert result is not None, f"{name} environment variable must be explicitly defined"
+    return result
+
+DEMO = envAssertDefined("DEMO", None)
+GQLUG_ENDPOINT_URL = envAssertDefined("GQLUG_ENDPOINT_URL", None)
+
+assert (DEMO in ["True", "true", "False", "false"]), "DEMO environment variable can have only `True` or `False` values"
+DEMO = DEMO in ["True", "true"]
+
+if DEMO:
+    print("####################################################")
+    print("#                                                  #")
+    print("# RUNNING IN DEMO                                  #")
+    print("#                                                  #")
+    print("####################################################")
+
+    logging.info("####################################################")
+    logging.info("#                                                  #")
+    logging.info("# RUNNING IN DEMO                                  #")
+    logging.info("#                                                  #")
+    logging.info("####################################################")
+else:
+    print("####################################################")
+    print("#                                                  #")
+    print("# RUNNING DEPLOYMENT                               #")
+    print("#                                                  #")
+    print("####################################################")
+
+    logging.info("####################################################")
+    logging.info("#                                                  #")
+    logging.info("# RUNNING DEPLOYMENT                               #")
+    logging.info("#                                                  #")
+    logging.info("####################################################")    
+
+logging.info(f"DEMO = {DEMO}")
+logging.info(f"SYSLOGHOST = {SYSLOGHOST}")
+logging.info(f"GQLUG_ENDPOINT_URL = {GQLUG_ENDPOINT_URL}")

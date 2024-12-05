@@ -1,0 +1,18 @@
+mutation UpdateCertificate($entity: CertificateUpdateInput!) {
+  updateCertificate(entity: $entity) {
+    __typename
+    ... on CertificateGQLModel {
+      id
+      level
+      validityStart
+      validityEnd
+      certificateType {
+        id
+        name
+      }
+    }
+    ... on UpdateError {
+      errorMessage
+    }
+  }
+}

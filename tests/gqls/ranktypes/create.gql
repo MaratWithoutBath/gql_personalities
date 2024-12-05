@@ -1,0 +1,13 @@
+mutation InsertRankType($entity: RankTypeInsertInput!) {
+  insertRankType(entity: $entity) {
+    __typename
+    ... on RankTypeGQLModel {
+      id
+      name
+      nameEn
+    }
+    ... on InsertError {
+      errorMessage
+    }
+  }
+}

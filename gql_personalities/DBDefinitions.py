@@ -147,7 +147,7 @@ class CertificateTypeModel(BaseModel):
     changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
     changedby = UUIDFKey(nullable=True)#Column(ForeignKey("users.id"), index=True, nullable=True)
 
-class CertificateTypeGroupModel(BaseModel):
+class CertificateCategoryModel(BaseModel):
     __tablename__ = "personalitiescertificatecategories"
 
     id = UUIDColumn()

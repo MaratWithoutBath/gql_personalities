@@ -1,0 +1,5 @@
+query GetCertificateTypePage($where: CertificateTypeInputFilter, $skip: Int = 0, $limit: Int = 10) {
+  certificateTypePage(where: $where, skip: $skip, limit: $limit) {
+    ...CertificateTypeFields
+  }
+}

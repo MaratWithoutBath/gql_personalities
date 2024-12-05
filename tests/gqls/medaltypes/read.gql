@@ -1,0 +1,14 @@
+query GetMedalTypeById($id: UUID!) {
+  medalTypeById(id: $id) {
+    ...MedalTypeFields
+  }
+}
+
+fragment MedalTypeFields on MedalTypeGQLModel {
+  id
+  name
+  nameEn
+  medalTypeGroup {
+    ...MedalTypeGroupFields
+  }
+}

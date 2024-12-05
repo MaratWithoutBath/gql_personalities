@@ -1,0 +1,17 @@
+mutation UpdateCertificateType($entity: CertificateTypeUpdateInput!) {
+  updateCertificateType(entity: $entity) {
+    __typename
+    ... on CertificateTypeGQLModel {
+      id
+      name
+      nameEn
+      certificateTypeGroup {
+        id
+        name
+      }
+    }
+    ... on UpdateError {
+      errorMessage
+    }
+  }
+}

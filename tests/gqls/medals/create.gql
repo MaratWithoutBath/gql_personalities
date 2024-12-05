@@ -1,0 +1,17 @@
+mutation InsertMedal($entity: MedalInsertInput!) {
+  insertMedal(entity: $entity) {
+    __typename
+    ... on MedalGQLModel {
+      id
+      year
+      medalType {
+        id
+        name
+        nameEn
+      }
+    }
+    ... on InsertError {
+      errorMessage
+    }
+  }
+}

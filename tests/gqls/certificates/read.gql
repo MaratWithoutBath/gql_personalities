@@ -1,0 +1,15 @@
+query GetCertificateById($id: UUID!) {
+  certificateById(id: $id) {
+    ...CertificateFields
+  }
+}
+
+fragment CertificateFields on CertificateGQLModel {
+  id
+  level
+  validityStart
+  validityEnd
+  certificateType {
+    ...CertificateTypeFields
+  }
+}
