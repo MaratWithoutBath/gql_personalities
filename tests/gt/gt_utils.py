@@ -117,6 +117,7 @@ def createByIdTest2(tableName, queryName=None, variables=None, expectedJson=None
             # firstKey = next(pageData.keys(), None)
             assert firstKey is not None, f"during query {tableName}_by_id got empty data {pageJson}"
             rows = pageData[firstKey]
+            assert len(rows) > 0, f"during query {tableName}_by_id got empty data {pageJson}"
             row = rows[0]
             assert "id" in row, f"during query {tableName}_by_id got page result but rows have no ids {row}"
             _variables = row

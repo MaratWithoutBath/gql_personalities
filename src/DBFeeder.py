@@ -648,7 +648,7 @@ async def initDB(asyncSessionMaker, filename="./systemdata.json"):
         MedalTypeModel, 
     ]
 
-    if os.environ.get("DEMO", defaultNoDemo) in [True, "true", "True"]:
+    if os.environ.get("DEMODATA", defaultNoDemo) in [True, "true", "True"]:
         dbModels.extend([
             RankModel,
             StudyModel,

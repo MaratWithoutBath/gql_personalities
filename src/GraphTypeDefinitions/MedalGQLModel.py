@@ -62,25 +62,32 @@ class MedalGQLModel(BaseGQLModel):
         resolver=ScalarResolver[MedalTypeGQLModel](fkey_field_name="medalType_id")
     )
 
+# @createInputs
+# @dataclasses.dataclass
+# class MedalInputFilter:
+#     startdate: typing.Optional[datetime.datetime] = None
+#     user_id: typing.Optional[IDType] = None
+#     medalType_id: typing.Optional[IDType] = None
+
 @createInputs
 @dataclasses.dataclass
 class MedalInputFilter:
-    startdate: typing.Optional[datetime.datetime] = None
-    user_id: typing.Optional[IDType] = None
-    medalType_id: typing.Optional[IDType] = None
-
+    startdate: datetime.datetime
+    user_id: IDType
+    medalType_id: IDType
 
 medal_by_id = strawberry.field(
     description="Find a medal by its ID",
     permission_classes=[OnlyForAuthentized],
-    graphql_type=typing.Optional["MedalGQLModel"],
+    graphql_type=typing.Optional[MedalGQLModel],
     resolver=MedalGQLModel.load_with_loader
 )
 
 medal_page = strawberry.field(
     description="Fetch paginated medals",
     permission_classes=[OnlyForAuthentized],
-    resolver=PageResolver["MedalGQLModel"](whereType=MedalInputFilter)
+    graphql_type=typing.List[MedalGQLModel],
+    resolver=PageResolver[MedalGQLModel](whereType=MedalInputFilter)
 )
 
 
@@ -112,36 +119,36 @@ class MedalDeleteGQLModel:
     description="Creates a new medal",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[MedalGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[MedalGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_insert(
     self, info: strawberry.types.Info, medal: MedalInsertGQLModel
 ) -> typing.Union["MedalGQLModel", InsertError["MedalGQLModel"]]:
-    return await Insert["MedalGQLModel"].DoItSafeWay(info=info, entity=medal)
+    return await Insert[MedalGQLModel].DoItSafeWay(info=info, entity=medal)
 
 
 @strawberry.mutation(
     description="Updates an existing medal",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[MedalGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[MedalGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_update(
     self, info: strawberry.types.Info, medal: MedalUpdateGQLModel
 ) -> typing.Union["MedalGQLModel", UpdateError["MedalGQLModel"]]:
-    return await Update["MedalGQLModel"].DoItSafeWay(info=info, entity=medal)
+    return await Update[MedalGQLModel].DoItSafeWay(info=info, entity=medal)
 
 
 @strawberry.mutation(
     description="Deletes a medal",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[MedalGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[MedalGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_delete(
     self, info: strawberry.types.Info, medal: MedalDeleteGQLModel
 ) -> typing.Optional[DeleteError["MedalGQLModel"]]:
-    return await Delete["MedalGQLModel"].DoItSafeWay(info=info, entity=medal)
+    return await Delete[MedalGQLModel].DoItSafeWay(info=info, entity=medal)

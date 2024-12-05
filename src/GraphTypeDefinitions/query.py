@@ -26,8 +26,8 @@ class Query:
     # certificate_category_page = certificate_category_page
 
     # Medal queries
-    # medal_by_id = medal_by_id
-    # medal_page = medal_page
+    medal_by_id = medal_by_id
+    medal_page = medal_page
 
     # Medal Type queries
     medal_type_by_id = medal_type_by_id
@@ -42,5 +42,5 @@ class Query:
     work_history_page = work_history_page
 
     # Related Document queries
-    # related_doc_by_id = related_doc_by_id
-    # related_doc_page = related_doc_page
+    related_doc_by_id = related_doc_by_id
+    related_doc_page = related_doc_page

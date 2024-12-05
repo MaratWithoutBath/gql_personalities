@@ -1,16 +1,8 @@
-
-mutation ($id: UUID!, $lastchange: DateTime!) {
-  result: facilityDelete(
-    facility: {id: $id, lastchange: $lastchange}
-  ) {
+mutation medalTypeDelete($id: UUID!, $lastchange: DateTime!) {
+  medalTypeDelete(medalType: {id: $id, lastchange: $lastchange}) {
     __typename
-    ...Error
+    ... on  MedalTypeGQLModelDeleteError{
+      msg
+    }
   }
-}
-
-
-fragment Error on FacilityGQLModelDeleteError {
-	__typename
-  failed
-  msg
 }

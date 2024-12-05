@@ -66,12 +66,19 @@ class CertificateTypeGQLModel(BaseGQLModel):
     )
 
 
+# @createInputs
+# @dataclasses.dataclass
+# class CertificateTypeInputFilter:
+#     name: typing.Optional[str] = None
+#     name_en: typing.Optional[str] = None
+#     certificateTypeGroup_id: typing.Optional[IDType] = None
+
 @createInputs
 @dataclasses.dataclass
 class CertificateTypeInputFilter:
-    name: typing.Optional[str] = None
-    name_en: typing.Optional[str] = None
-    certificateTypeGroup_id: typing.Optional[IDType] = None
+    name: str
+    name_en: str
+    certificateTypeGroup_id: IDType
 
 
 certificate_type_by_id = strawberry.field(

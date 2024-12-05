@@ -1,17 +1,16 @@
-mutation InsertMedal($entity: MedalInsertInput!) {
-  insertMedal(entity: $entity) {
+mutation   medalInsert($id: UUID, $startdate: DateTime!, $user_id: UUID!, $medal_type_id: UUID!) {
+    medalInsert(medal: {id: $id, startdate: $startdate, userId: $user_id, medalTypeId: $medal_type_id}) {
     __typename
-    ... on MedalGQLModel {
-      id
-      year
-      medalType {
-        id
-        name
-        nameEn
-      }
-    }
+    ...Medal
     ... on InsertError {
-      errorMessage
+      msg
     }
   }
+}
+
+fragment Medal on MedalGQLModel {
+  id
+  lastchange
+  created
+  
 }

@@ -1,5 +1,13 @@
-query GetMedalPage($where: MedalInputFilter, $skip: Int = 0, $limit: Int = 10) {
-  medalPage(where: $where, skip: $skip, limit: $limit) {
-    ...MedalFields
+query GetMedals($skip: Int = 0, $limit: Int = 10, $orderby: String, $where: MedalInputFilter) {
+  medalPage(skip: $skip, limit: $limit, orderby: $orderby, where: $where) {
+    __typename
+    ...Medal
   }
+}
+
+fragment Medal on MedalGQLModel {
+  id
+  lastchange
+  created
+  
 }

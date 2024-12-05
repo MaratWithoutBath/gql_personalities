@@ -1,5 +1,13 @@
 query GetMedalById($id: UUID!) {
   medalById(id: $id) {
-    ...MedalFields
+    __typename
+    ...Medal
   }
+}
+
+fragment Medal on MedalGQLModel {
+  id
+  lastchange
+  created
+  
 }

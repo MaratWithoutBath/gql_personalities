@@ -114,7 +114,7 @@ class MedalTypeDeleteGQLModel:
     description="Creates a new medal type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[MedalTypeGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[MedalTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_type_insert(
@@ -127,7 +127,7 @@ async def medal_type_insert(
     description="Updates an existing medal type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[MedalTypeGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[MedalTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_type_update(
@@ -140,7 +140,7 @@ async def medal_type_update(
     description="Deletes a medal type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[MedalTypeGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[MedalTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_type_delete(

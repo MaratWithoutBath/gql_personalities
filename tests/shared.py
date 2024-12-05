@@ -22,37 +22,46 @@ async def prepare_in_memory_sqllite():
 
 
 async def prepare_demodata(async_session_maker):
-    # from src.DBFeeder import get_demodata
-    # from src.DBDefinitions import (
-    #     RankModel,
-    #     StudyModel,
-    #     CertificateModel,
-    #     MedalModel,
-    #     WorkHistoryModel,
-    #     RelatedDocModel,
-    #     RankTypeModel, 
-    #     CertificateTypeModel, 
-    #     MedalTypeModel, 
-    #     MedalCategoryModel,
-    #     CertificateCategoryModel
-    # )
+    from src.DBFeeder import get_demodata
+    from src.DBDefinitions import (
+        RankModel,
+        StudyModel,
+        CertificateModel,
+        MedalModel,
+        WorkHistoryModel,
+        RelatedDocModel,
+        RankTypeModel, 
+        CertificateTypeModel, 
+        MedalTypeModel, 
+        MedalCategoryModel,
+        CertificateCategoryModel
+    )
 
-    # data = get_demodata()
+    data = get_demodata()
 
-    # from uoishelpers.feeders import ImportModels
+    from uoishelpers.feeders import ImportModels
 
-    # await ImportModels(
-    #     async_session_maker,
-    #     [
-    #         FacilityModel, 
-    #         FacilityTypeModel,
-    #         EventFacilityModel, 
-    #         EventFacilityStateType,            
-    #     ],
-    #     data,
-    # )
-    from src.DBFeeder import initDB
-    await initDB(asyncSessionMaker=async_session_maker)
+    dbModels = [
+        CertificateCategoryModel,
+        CertificateTypeModel, 
+        MedalCategoryModel,
+        RankTypeModel, 
+        MedalTypeModel, 
+        RankModel,
+        StudyModel,
+        CertificateModel,
+        MedalModel,
+        WorkHistoryModel,
+        RelatedDocModel
+        ]
+
+    await ImportModels(
+        async_session_maker,
+        dbModels,
+        data,
+    )
+    # from src.DBFeeder import initDB
+    # await initDB(asyncSessionMaker=async_session_maker)
 
 
 async def createContext(asyncSessionMaker):

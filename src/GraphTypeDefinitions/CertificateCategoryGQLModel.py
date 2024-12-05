@@ -33,7 +33,7 @@ CertificateTypeGQLModel = typing.Annotated["CertificateTypeGQLModel", strawberry
 class CertificateCategoryGQLModel(BaseGQLModel):
     @classmethod
     def getLoader(cls, info: strawberry.types.Info):
-        return getLoadersFromInfo(info).CertificateTypeGroupModel
+        return getLoadersFromInfo(info).CertificateCategoryModel
 
     name: typing.Optional[str] = strawberry.field(
         default=None,
@@ -57,29 +57,35 @@ class CertificateCategoryGQLModel(BaseGQLModel):
         resolver=VectorResolver[CertificateTypeGQLModel](fkey_field_name="certificateTypeGroup_id", whereType=None)
     )
 
+# @createInputs
+# @dataclasses.dataclass
+# class CertificateTypeGroupInputFilter:
+#     name: typing.Optional[str] = None
+#     name_en: typing.Optional[str] = None
+#     changedby_id: typing.Optional[IDType] = None
+#     created: typing.Optional[datetime.datetime] = None
+#     lastchange: typing.Optional[datetime.datetime] = None
+
 @createInputs
 @dataclasses.dataclass
 class CertificateTypeGroupInputFilter:
-    name: typing.Optional[str] = None
-    name_en: typing.Optional[str] = None
-    changedby_id: typing.Optional[IDType] = None
-    created: typing.Optional[datetime.datetime] = None
-    lastchange: typing.Optional[datetime.datetime] = None
-
-
-certificate_category_by_id = strawberry.field(
-    description="Find a certificate type group by its ID",
-    permission_classes=[OnlyForAuthentized],
-    graphql_type=typing.Optional["CertificateCategoryGQLModel"],
-    resolver=CertificateCategoryGQLModel.load_with_loader
-)
+    name: str
+    name_en: str
+    changedby_id: IDType
+    created: datetime.datetime
+    lastchange: datetime.datetime
 
 certificate_category_page = strawberry.field(
     description="Fetch paginated certificate type groups",
     permission_classes=[OnlyForAuthentized],
     resolver=PageResolver["CertificateCategoryGQLModel"](whereType=CertificateTypeGroupInputFilter)
 )
-
+certificate_category_by_id = strawberry.field(
+    description="Find a certificate type group by its ID",
+    permission_classes=[OnlyForAuthentized],
+    graphql_type=typing.Optional["CertificateCategoryGQLModel"],
+    resolver=CertificateCategoryGQLModel.load_with_loader
+)
 
 @strawberry.input(description="Attributes for creating a certificate type group")
 class CertificateTypeGroupInsertGQLModel:

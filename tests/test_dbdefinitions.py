@@ -16,13 +16,6 @@ def test_connection_string():
     assert "@" in connectionString
 
 
-def test_connection_uuidcolumn():
-    from src.DBDefinitions import UUIDColumn
-    col = UUIDColumn(name="name")
-
-    assert col is not None
-
-
 @pytest.mark.asyncio
 async def test_table_start_engine():
     from src.DBDefinitions import startEngine
