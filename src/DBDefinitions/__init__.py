@@ -1,13 +1,12 @@
 import sqlalchemy
 
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.ext.asyncio import create_async_engine
 
 
-import logging
+# import logging
 
 # Set up logging to see the queries
 # logging.basicConfig()

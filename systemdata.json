@@ -376,7 +376,8 @@
     ],
     "personalitiesmedaltypes": [
         {
-            "name": "Řád Bílého lva", "id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002"
+            "name": "Řád Bílého lva", 
+            "id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002"
         },
         {
             "name": "Řád Tomáše Garrigua Masaryka",
@@ -599,6 +600,14 @@
             "startdate": "2010-09-01T00:00:00",
             "enddate": "2016-06-15T00:00:00",
             "level": "3333"
+        }
+    ],
+    "personalitiesmedals": [
+        {
+            "id": "9956d676-e960-466a-8fb4-a48128b46003",
+            "medalType_id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002",
+            "user_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "startdate": "2010-09-01T00:00:00"
         }
     ]
 }

@@ -1,10 +1,11 @@
+import fastapi
 import pytest
 import logging
-import fastapi
 import uvicorn
 import pytest_asyncio
 import pydantic
 import time
+
 
 from contextlib import contextmanager
 
@@ -151,7 +152,7 @@ async def Context():
     from src.DBFeeder import initDB
     await initDB(asyncSessionMaker=async_session_maker, filename="./systemdata.json")
     # context
-    from Dataloaders import createLoadersContext
+    from src.Dataloaders import createLoadersContext
     loadersContext = createLoadersContext(asyncSessionMaker=async_session_maker)
     # ...
 

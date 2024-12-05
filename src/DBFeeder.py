@@ -637,7 +637,7 @@ from uoishelpers.dataloaders import readJsonFile
 def get_demodata(filename="./systemdata.json"):
     return readJsonFile(filename)
 
-async def initDB(asyncSessionMaker):
+async def initDB(asyncSessionMaker, filename="./systemdata.json"):
 
     defaultNoDemo = "False"
     dbModels = [
@@ -658,6 +658,6 @@ async def initDB(asyncSessionMaker):
             RelatedDocModel
         ])
 
-    jsonData = get_demodata()
+    jsonData = get_demodata(filename=filename)
     await ImportModels(asyncSessionMaker, dbModels, jsonData)
     pass
