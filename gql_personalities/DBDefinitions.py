@@ -21,10 +21,11 @@ import uuid
 BaseModel = declarative_base()
 
 def newUuidAsString():
+    # Generuje nový UUID jako řetězec
     return f"{uuid.uuid1()}"
 
-
 def UUIDColumn(name=None):
+    # Definuje sloupec s UUID
     if name is None:
         return Column(String, primary_key=True, unique=True, default=newUuidAsString)
     else:
@@ -32,8 +33,8 @@ def UUIDColumn(name=None):
             name, String, primary_key=True, unique=True, default=newUuidAsString
         )
 
-
 def UUIDFKey(*, ForeignKey=None, nullable=False):
+    # Definuje cizí klíč s UUID
     if ForeignKey is None:
         return Column(
             String, index=True, nullable=nullable
@@ -42,7 +43,6 @@ def UUIDFKey(*, ForeignKey=None, nullable=False):
         return Column(
             ForeignKey, index=True, nullable=nullable
         )
-# id = Column(UUID(as_uuid=True), primary_key=True, server_default=sqlalchemy.text("uuid_generate_v4()"),)
 
 ###########################################################################################################################
 #
