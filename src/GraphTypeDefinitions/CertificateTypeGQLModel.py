@@ -123,7 +123,7 @@ class CertificateTypeDeleteGQLModel:
     description="Creates a new certificate type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[CertificateTypeGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[CertificateTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def certificate_type_insert(
@@ -136,7 +136,7 @@ async def certificate_type_insert(
     description="Updates an existing certificate type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[CertificateTypeGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[CertificateTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def certificate_type_update(
@@ -149,7 +149,7 @@ async def certificate_type_update(
     description="Deletes a certificate type",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[CertificateTypeGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[CertificateTypeGQLModel](roles=["administrátor"]),
     ]
 )
 async def certificate_type_delete(

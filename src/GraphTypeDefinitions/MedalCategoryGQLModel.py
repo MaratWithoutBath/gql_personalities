@@ -99,7 +99,7 @@ class MedalCategoryDeleteGQLModel:
     description="Creates a new medal category",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[MedalCategoryGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[MedalCategoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_category_insert(
@@ -112,7 +112,7 @@ async def medal_category_insert(
     description="Updates an existing medal category",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[MedalCategoryGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[MedalCategoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_category_update(
@@ -125,7 +125,7 @@ async def medal_category_update(
     description="Deletes a medal category",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[MedalCategoryGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[MedalCategoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def medal_category_delete(
