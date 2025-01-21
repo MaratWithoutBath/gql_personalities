@@ -22,3 +22,5 @@ pytest
 pytest-cov
 pytest-asyncio
 aiosqlite
+prometheus_client
+
