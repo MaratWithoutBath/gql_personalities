@@ -3,6 +3,7 @@ import asyncio
 import pytest
 
 async def prepare_in_memory_sqllite():
+    # Vytvoří asynchronní SQLite engine a inicializuje databázi v paměti
     from sqlalchemy.ext.asyncio import create_async_engine
     from sqlalchemy.ext.asyncio import AsyncSession
     from sqlalchemy.orm import sessionmaker
@@ -22,6 +23,7 @@ async def prepare_in_memory_sqllite():
 
 
 async def prepare_demodata(async_session_maker):
+    # Naplní databázi testovacími daty
     from src.DBFeeder import get_demodata
     from src.DBDefinitions import (
         RankModel,
@@ -65,6 +67,7 @@ async def prepare_demodata(async_session_maker):
 
 
 async def createContext(asyncSessionMaker):
+    # Vytvoří kontext s asynchronními session a dataloadery
     from Dataloaders import createLoaders_3
     return {
         "asyncSessionMaker": asyncSessionMaker,

@@ -119,7 +119,7 @@ class WorkHistoryDeleteGQLModel:
     description="Creates a new work history record",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[WorkHistoryGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[WorkHistoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def work_history_insert(
@@ -132,7 +132,7 @@ async def work_history_insert(
     description="Updates an existing work history record",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[WorkHistoryGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[WorkHistoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def work_history_update(
@@ -145,7 +145,7 @@ async def work_history_update(
     description="Deletes a work history record",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[WorkHistoryGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[WorkHistoryGQLModel](roles=["administrátor"]),
     ]
 )
 async def work_history_delete(

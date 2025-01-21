@@ -10,6 +10,7 @@ import time
 from contextlib import contextmanager
 
 class Item(pydantic.BaseModel):
+    # Model pro GraphQL dotazy
     query: str
     variables: dict = None
     operationName: str = None
@@ -18,6 +19,7 @@ serversTestscope = "session"
 # serversTestscope = "function"
 
 def runOAuthServer(port, resolvers):
+    # Spustí OAuth server na zadaném portu s danými resolvery
     mainapp = fastapi.FastAPI()
     @mainapp.post("/gql")
     async def post(item: Item):
@@ -31,6 +33,7 @@ def runOAuthServer(port, resolvers):
 
 @contextmanager
 def runOauth(port, resolvers):
+    # Kontextový manažer pro spuštění a zastavení OAuth serveru
     from multiprocessing import Process
     
     _api_process = Process(target=runOAuthServer, daemon=True, kwargs={"port": port, "resolvers": resolvers})
@@ -57,6 +60,7 @@ import aiohttp
 import pydantic
 
 def serveMe(item: Item):
+    # Resolver pro obsluhu dotazu 'me'
     logging.info(f"serveMe {item}")
     if "me {" in item.query:
         result = {
@@ -77,11 +81,13 @@ def serveMe(item: Item):
     return result
 
 server_resolvers = [
+    # Seznam resolverů pro server
     serveMe
 ]
 
 @pytest.fixture(autouse=True, scope=serversTestscope)
 def Server():
+    # Fixture pro spuštění serveru a vytvoření klienta pro testování
     serverport = 8125
 
     url = f"http://localhost:{serverport}/gql"
@@ -130,6 +136,7 @@ NoRole_UG_Server = Server
 
 @pytest_asyncio.fixture
 async def Context():
+    # Fixture pro vytvoření kontextu s asynchronními session a dataloadery
     # async_session_maker
     from sqlalchemy.ext.asyncio import create_async_engine
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -185,6 +192,7 @@ async def Context():
 
 @pytest.fixture
 def SchemaExecutor(Context):
+    # Fixture pro vykonávání GraphQL dotazů s daným kontextem
     # GQLUG_ENDPOINT_URL
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setenv("GQLUG_ENDPOINT_URL", "http://localhost:8125/gql")

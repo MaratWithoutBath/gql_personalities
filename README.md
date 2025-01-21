@@ -44,3 +44,14 @@ uvicorn main:app --env-file environment.txt --port 8001
 ```bash
 pytest --cov-report term-missing --cov=src --log-cli-level=INFO -x
 ```
+
+test pto vkládání dat:
+mutation MyMutation {
+  certificateInsert(
+    certificate: {level: "1", id: "bf92dfb7-f999-47e5-9d3a-9ce14bbcbae0", startdate: "2016-06-15T00:00:00", userId: "09baa07b-5b9a-4b4f-b230-be41ef9f021d", certificateTypeId: "9ef403b8-f75d-4a7a-a013-65e6706f8d8a", enddate: "2024-12-09T07:58:30.821886"}
+  ) {
+    ... on InsertError {
+      input
+    }
+  }
+}

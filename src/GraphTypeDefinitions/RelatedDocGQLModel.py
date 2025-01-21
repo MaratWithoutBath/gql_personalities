@@ -112,7 +112,7 @@ class RelatedDocDeleteGQLModel:
     description="Creates a new related document",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleInsertPermission[RelatedDocGQLModel](roles=["administrator"]),
+        SimpleInsertPermission[RelatedDocGQLModel](roles=["administrátor"]),
     ]
 )
 async def related_doc_insert(
@@ -125,7 +125,7 @@ async def related_doc_insert(
     description="Updates an existing related document",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleUpdatePermission[RelatedDocGQLModel](roles=["administrator"]),
+        SimpleUpdatePermission[RelatedDocGQLModel](roles=["administrátor"]),
     ]
 )
 async def related_doc_update(
@@ -138,7 +138,7 @@ async def related_doc_update(
     description="Deletes a related document",
     permission_classes=[
         OnlyForAuthentized,
-        SimpleDeletePermission[RelatedDocGQLModel](roles=["administrator"]),
+        SimpleDeletePermission[RelatedDocGQLModel](roles=["administrátor"]),
     ]
 )
 async def related_doc_delete(

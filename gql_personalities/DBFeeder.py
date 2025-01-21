@@ -37,11 +37,13 @@ def singleCall(asyncFunc):
 #
 ###########################################################################################################################
 def get_demodata(asyncSessionMaker):
+    # Funkce pro získání testovacích dat
     pass
 
 
 @cache
 def determineRankType():
+    # Funkce pro určení typů hodností
     rankTypes = [
         # mužstvo
         {
@@ -155,6 +157,7 @@ def determineRankType():
 
 @cache
 def determineStudyPlace():
+    # Funkce pro určení míst studia
     studyPlaces = [
         # veřejné VŠ
         {
@@ -304,6 +307,7 @@ def determineStudyPlace():
 
 @cache
 def determineStudyProgram():
+    # Funkce pro určení studijních programů
     studyPrograms = [
         {
             "name": "bakalářský",
@@ -326,6 +330,7 @@ def determineStudyProgram():
 
 @cache
 def determineCertificateType():
+    # Funkce pro určení typů certifikátů
     certificateTypes = [
         # jazykové
         {
@@ -453,6 +458,7 @@ def determineCertificateType():
 
 
 def determineCertificateTypeGroup():
+    # Funkce pro určení skupin typů certifikátů
     certificateTypeGroups = [
         {
             "name": "jazykové",
@@ -480,6 +486,7 @@ def determineCertificateTypeGroup():
 
 @cache
 def determineMedalType():
+    # Funkce pro určení typů medailí
     medalTypes = [
         # Řády a vyznamenání České republiky
         {
@@ -536,6 +543,7 @@ def determineMedalType():
 
 @cache
 def determineMedalTypeGroup():
+    # Funkce pro určení skupin typů medailí
     medalTypeGroup = [
         {
             "name": "Řády a vyznamenání České republiky",
@@ -558,6 +566,7 @@ def determineMedalTypeGroup():
 
 @cache
 def determineWorkHistoryPosition():
+    # Funkce pro určení pracovních pozic
     workHistoryPosition = [
         {"name": "manažer", "name_en": "manager", "id": "3406c765-8454-4f3a-b3bb-76b74582be2e"},
         {"name": "účetní", "name_en": "accountant", "id": "d9a50a22-edf4-4264-98f0-5a9eced115c4"},
@@ -580,6 +589,7 @@ def determineWorkHistoryPosition():
 
 @cache
 def determineWorkHistory():
+    # Funkce pro určení pracovních historií
     workHistories = [
         {
             "name": "TechCorp",
@@ -596,6 +606,7 @@ def determineWorkHistory():
 
 @cache
 def determineRelatedDocs():
+    # Funkce pro určení souvisejících dokumentů
     relatedDocs = [
         {
             "name": "Dokument A",
@@ -620,7 +631,9 @@ import datetime
 
 
 def get_demodata():
+    # Funkce pro získání testovacích dat ze souboru
     def datetime_parser(json_dict):
+        # Parser pro převod datových typů
         for (key, value) in json_dict.items():
             if key in ["startdate", "enddate", "lastchange", "created"]:
                 if value is None:
@@ -643,6 +656,7 @@ def get_demodata():
 
 
 async def initDB(asyncSessionMaker):
+    # Inicializace databáze s testovacími daty
 
     defaultNoDemo = os.environ.get("DEMO", None) not in ["True", "true", "1"]
     if defaultNoDemo:
