@@ -76,9 +76,18 @@ class CertificateTypeGQLModel(BaseGQLModel):
 @createInputs
 @dataclasses.dataclass
 class CertificateTypeInputFilter:
-    name: str
-    name_en: str
-    certificateTypeGroup_id: IDType
+    name: str = strawberry.field(
+        description="Filter by certificate type name",
+        permission_classes=[OnlyForAuthentized]
+    )
+    name_en: str = strawberry.field(
+        description="Filter by English certificate type name",
+        permission_classes=[OnlyForAuthentized]
+    )
+    certificateTypeGroup_id: IDType = strawberry.field(
+        description="Filter by certificate type group ID",
+        permission_classes=[OnlyForAuthentized]
+    )
 
 
 certificate_type_by_id = strawberry.field(

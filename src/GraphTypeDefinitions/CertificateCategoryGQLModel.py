@@ -69,11 +69,26 @@ class CertificateCategoryGQLModel(BaseGQLModel):
 @createInputs
 @dataclasses.dataclass
 class CertificateTypeGroupInputFilter:
-    name: str
-    name_en: str
-    changedby_id: IDType
-    created: datetime.datetime
-    lastchange: datetime.datetime
+    name: str = strawberry.field(
+        description="Filter by group name",
+        permission_classes=[OnlyForAuthentized]
+    )
+    name_en: str = strawberry.field(
+        description="Filter by English group name",
+        permission_classes=[OnlyForAuthentized]
+    )
+    changedby_id: IDType = strawberry.field(
+        description="Filter by 'changed by' user ID",
+        permission_classes=[OnlyForAuthentized]
+    )
+    created: datetime.datetime = strawberry.field(
+        description="Filter by creation date/time",
+        permission_classes=[OnlyForAuthentized]
+    )
+    lastchange: datetime.datetime = strawberry.field(
+        description="Filter by last change date/time",
+        permission_classes=[OnlyForAuthentized]
+    )
 
 certificate_category_page = strawberry.field(
     description="Fetch paginated certificate type groups",

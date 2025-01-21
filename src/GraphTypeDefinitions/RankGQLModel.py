@@ -68,10 +68,23 @@ class RankGQLModel(BaseGQLModel):
 @createInputs
 @dataclasses.dataclass
 class RankInputFilter:
-    start: datetime.datetime
-    end: datetime.datetime
-    user_id: typing.Optional[IDType]
-    ranktype_id: IDType
+    start: datetime.datetime = strawberry.field(
+        description="Filter by start date",
+        permission_classes=[OnlyForAuthentized]
+    )
+    end: datetime.datetime = strawberry.field(
+        description="Filter by end date",
+        permission_classes=[OnlyForAuthentized]
+    )
+    user_id: typing.Optional[IDType] = strawberry.field(
+        description="Filter by user ID",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    ranktype_id: IDType = strawberry.field(
+        description="Filter by rank type ID",
+        permission_classes=[OnlyForAuthentized]
+    )
 
 rank_by_id = strawberry.field(
     description="""Finds a rank by its ID""",

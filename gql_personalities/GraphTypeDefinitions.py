@@ -451,7 +451,7 @@ class Query:
     # rank
     @strawberryA.field(description="""Returns a list of ranks (paged)""", permission_classes=[OnlyForAuthentized])
     async def rank_page(
-        self, info: strawberryA.types.Info, skip: int = 0, limit: int = 10
+        self, info: strawberryA.types.Info, where: int = 0 , skip: int = 0, limit: int = 10
     ) -> List[RankGQLModel]:
         # Resolver pro získání seznamu hodností (stránkovaný)
         async with withInfo(info) as session:

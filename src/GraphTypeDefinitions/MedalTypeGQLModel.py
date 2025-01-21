@@ -67,9 +67,21 @@ class MedalTypeGQLModel(BaseGQLModel):
 @createInputs
 @dataclasses.dataclass
 class MedalTypeInputFilter:
-    name: typing.Optional[str] = None
-    name_en: typing.Optional[str] = None
-    medalTypeGroup_id: typing.Optional[IDType] = None
+    name: typing.Optional[str] = strawberry.field(
+        description="Filter by name",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    name_en: typing.Optional[str] = strawberry.field(
+        description="Filter by English name",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    medalTypeGroup_id: typing.Optional[IDType] = strawberry.field(
+        description="Filter by medal type group ID",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
 
 
 medal_type_by_id = strawberry.field(

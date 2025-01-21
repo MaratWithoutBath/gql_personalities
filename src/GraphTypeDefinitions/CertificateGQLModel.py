@@ -92,11 +92,31 @@ class CertificateGQLModel(BaseGQLModel):
 @createInputs
 @dataclasses.dataclass
 class CertificateInputFilter:
-    level: typing.Optional[str] = None
-    startdate: typing.Optional[datetime.datetime] = None
-    enddate: typing.Optional[datetime.datetime] = None
-    user_id: typing.Optional[IDType] = None
-    certificateType_id: typing.Optional[IDType] = None
+    level: typing.Optional[str] = strawberry.field(
+        description="Filter by certificate level",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    startdate: typing.Optional[datetime.datetime] = strawberry.field(
+        description="Filter by certificate start date",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    enddate: typing.Optional[datetime.datetime] = strawberry.field(
+        description="Filter by certificate end date",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    user_id: typing.Optional[IDType] = strawberry.field(
+        description="Filter by user ID",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
+    certificateType_id: typing.Optional[IDType] = strawberry.field(
+        description="Filter by certificate type ID",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
 
 
 certificate_by_id = strawberry.field(
