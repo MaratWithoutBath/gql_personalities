@@ -37,66 +37,66 @@ docker-compose up
 
 # Our diary ε>
 30.9. 2024 
-- vybrání tématu
+  - vybrání tématu
 1.10. 2024 
-- fork
+  - fork
 4.10.2024 
-- pokus o aktualizování dockeru
+  - pokus o aktualizování dockeru
 8.10. 2024
-- publikovaný repository
+  - publikovaný repository
 30.10. 2024
-- dopsány komentáře k DBDefinitions
+  - dopsány komentáře k DBDefinitions
 31.10. 2024
-- odstranění komentářů, které nebyly podporovány strukturou
-- doplněny rba_objekty k datovým strukturám
+  - odstranění komentářů, které nebyly podporovány strukturou
+  - doplněny rba_objekty k datovým strukturám
 14.11. 2024
-- snažíme se pochopit jak fungují CRUD operace 
-- krademe od Tomáše Urbana
+  - snažíme se pochopit jak fungují CRUD operace 
+  - krademe od Tomáše Urbana
 25.11. 2024
-- přidán voyager
-- kompletní napsání dataloaders
-- komentáře do GraphResolvers
+  - přidán voyager
+  - kompletní napsání dataloaders
+  - komentáře do GraphResolvers
 27.11. 2024
-- vkládání dat do systemdata.json
-- malý debug
+  - vkládání dat do systemdata.json
+  - malý debug
 28.11. 2024
-- další data do systemdata.json
-- WhoAmIExtension
-- odstraněn DataLoaders.py, nahrazen sdíleným
-- update requirements
-- GraphGLRouter přidán do main
-- debug
-	- opraven localhost
-	- gqlug enviroment variable
-	- encoding češtiny
+  - další data do systemdata.json
+  - WhoAmIExtension
+  - odstraněn DataLoaders.py, nahrazen sdíleným
+  - update requirements
+  - GraphGLRouter přidán do main
+  - debug
+    - opraven localhost
+    - gqlug enviroment variable
+    - encoding češtiny
 02.12. 2024 
-- přidány data
+  - přidány data
 03.12. 2024
-- CUD operace nefungují
+  - CUD operace nefungují
 04.12. 2024
-- oprava CUD operací
+  - oprava CUD operací
 05.12. 2024
-- upravení DataLoaders, aby fungovalo createLoaders
+  - upravení DataLoaders, aby fungovalo createLoaders
 ---
 5.12. 2024
-- celkové přepsání - 80% testů splněno
+  - celkové přepsání - 80% testů splněno
 ---
 20.01. 2025
-- update readme,
-- debug 
-	- změna slova administrator na administrátor v roles,
-	- doplněny permission classes
-- kompletně okomentovaný kód
-21.01. 2025 
-- update requirements
-- doplnění strawberry fields a do nich dopsány:
-	- descriptions
-	- permissions classes
+  - update readme,
+  - debug 
+    - změna slova administrator na administrátor v roles,
+    - doplněny permission classes
+  - kompletně okomentovaný kód
+  21.01. 2025 
+  - update requirements
+  - doplnění strawberry fields a do nich dopsány:
+    - descriptions
+    - permissions classes
 23.01. 2025 
-- kontrola požadavků a počítání bodů
-- spuštění testu - došlo nám, že opravdu máme 80%
+  - kontrola požadavků a počítání bodů
+  - spuštění testu - došlo nám, že opravdu máme 80%
 26.01.2025-27.01.2025
-- přidávání tetsů pro ranktype - POKRYTÍ KRÁSNÝCH 90%
+  - přidávání tetsů pro ranktype - POKRYTÍ KRÁSNÝCH 90%
 
 rozdělení práce
 ## míra
