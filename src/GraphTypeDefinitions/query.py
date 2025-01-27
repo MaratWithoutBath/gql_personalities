@@ -9,6 +9,8 @@ from .MedalTypeGQLModel import medal_type_by_id, medal_type_page
 from .MedalCategoryGQLModel import medal_category_by_id, medal_category_page
 from .WorkHistoryGQLModel import work_history_by_id, work_history_page
 from .RelatedDocGQLModel import related_doc_by_id, related_doc_page
+from .RankGQLModel import rank_by_id, rank_page
+from .RankTypeGQLModel import rank_type_by_id, rank_type_page
 
 
 @strawberry.type(description="Root Query for all entities")
@@ -44,3 +46,11 @@ class Query:
     # Related Document queries
     related_doc_by_id = related_doc_by_id
     related_doc_page = related_doc_page
+
+    # Rank queries
+    rank_by_id = rank_by_id
+    rank_page = rank_page
+
+    # Rank Type queries
+    rank_type_by_id = rank_type_by_id
+    rank_type_page = rank_type_page

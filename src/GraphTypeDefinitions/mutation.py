@@ -9,6 +9,8 @@ from .MedalTypeGQLModel import medal_type_insert, medal_type_update, medal_type_
 from .MedalCategoryGQLModel import medal_category_insert, medal_category_update, medal_category_delete
 from .WorkHistoryGQLModel import work_history_insert, work_history_update, work_history_delete
 from .RelatedDocGQLModel import related_doc_insert, related_doc_update, related_doc_delete
+from .RankTypeGQLModel import rank_type_insert, rank_type_update, rank_type_delete
+from .RankGQLModel import rank_insert, rank_update, rank_delete
 
 
 @strawberry.type(description="Root Mutation for all entities")
@@ -52,3 +54,13 @@ class Mutation:
     related_doc_insert = related_doc_insert
     related_doc_update = related_doc_update
     related_doc_delete = related_doc_delete
+
+    # Rank Type mutations
+    rank_type_insert = rank_type_insert
+    rank_type_update = rank_type_update
+    rank_type_delete = rank_type_delete
+
+    # Rank mutations
+    rank_insert = rank_insert
+    rank_update = rank_update
+    rank_delete = rank_delete

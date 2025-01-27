@@ -1,0 +1,18 @@
+
+mutation InsertRank($id: UUID, $start: DateTime!, $end: DateTime!, $rankType_id: UUID!) {
+  rankInsert(rank: {id: $id, start: $start, end: $end, rankTypeId: $rankType_id}) {
+    __typename
+    ... on RankGQLModel {
+      id
+      start
+      end
+      rankType {
+        id
+        name
+      }
+    }
+    ... on InsertError {
+      msg
+    }
+  }
+}

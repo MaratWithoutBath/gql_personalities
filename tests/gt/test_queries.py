@@ -75,3 +75,12 @@ test_medal_type_delete = createDeleteTest2(
         "name": "newname",
         "medal_category_id": "6299630e-4d27-44a9-a844-53831add33ca"
     })
+
+test_rank_type_create = createTest2(
+    tableName="ranktypes", 
+    queryName="create", 
+    variables={
+            "id": "cf4c274c-6cf1-11ed-a1eb-0242ac120002",
+            "name": "newname",
+            "nameEn": "newnameEn"
+      })

@@ -1,13 +1,13 @@
-mutation InsertRankType($entity: RankTypeInsertInput!) {
-  insertRankType(entity: $entity) {
+mutation InsertRankType($name: String!, $nameEn: String!, $id: UUID) {
+  rankTypeInsert(rankType: {name: $name, nameEn: $nameEn, id: $id}) {
     __typename
+    ... on InsertError {
+      msg
+    }
     ... on RankTypeGQLModel {
       id
       name
       nameEn
-    }
-    ... on InsertError {
-      errorMessage
     }
   }
 }
