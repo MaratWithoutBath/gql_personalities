@@ -1,0 +1,9 @@
+
+query GetRankById($id: UUID!) {
+  rankById(id: $id) {
+    id
+    start
+    end
+    // ...existing code...
+  }
+}

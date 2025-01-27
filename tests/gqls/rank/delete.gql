@@ -1,0 +1,14 @@
+
+mutation DeleteRank($id: UUID!, $start: DateTime!, $end: DateTime!) {
+  rankDelete(rank: {id: $id, start: $start, end: $end}) {
+    __typename
+    ... on RankGQLModel {
+      id
+      start
+      end
+    }
+    ... on UpdateError {
+      msg
+    }
+  }
+}

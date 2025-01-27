@@ -1,0 +1,8 @@
+
+query GetRankPage($skip: Int = 0, $limit: Int = 10) {
+  rankPage(skip: $skip, limit: $limit) {
+    id
+    start
+    end
+  }
+}

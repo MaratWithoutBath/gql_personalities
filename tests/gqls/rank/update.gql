@@ -1,0 +1,18 @@
+
+mutation UpdateRank($id: UUID!, $start: DateTime!, $end: DateTime!, $rankType_id: UUID!) {
+  rankUpdate(rank: {id: $id, start: $start, end: $end, rankTypeId: $rankType_id}) {
+    __typename
+    ... on RankGQLModel {
+      id
+      start
+      end
+      rankType {
+        id
+        name
+      }
+    }
+    ... on RankGQLModelUpdateError {
+      msg
+    }
+  }
+}

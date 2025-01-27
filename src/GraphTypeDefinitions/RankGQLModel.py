@@ -26,6 +26,7 @@ from uoishelpers.resolvers import (
 )
 
 from .BaseGQLModel import BaseGQLModel, IDType
+from .RankTypeGQLModel import RankTypeGQLModel
 
 @strawberry.federation.type(
     keys=["id"], description="""Entity representing a Rank"""
@@ -81,8 +82,9 @@ class RankInputFilter:
         default=None,
         permission_classes=[OnlyForAuthentized]
     )
-    ranktype_id: IDType = strawberry.field(
+    ranktype_id: typing.Optional[IDType] = strawberry.field(
         description="Filter by rank type ID",
+        default=None,
         permission_classes=[OnlyForAuthentized]
     )
 

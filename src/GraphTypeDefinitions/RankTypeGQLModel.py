@@ -27,6 +27,11 @@ from uoishelpers.resolvers import (
 from .BaseGQLModel import BaseGQLModel, IDType
 
 
+#určitě to dělá něco důležitého, ale nevím co dodělat
+RankGQLModel = typing.Annotated["RankGQLModel", strawberry.lazy(".RankGQLModel")]
+RankCategoryGQLModel = typing.Annotated["RankCategoryGQLModel", strawberry.lazy(".RankCategoryGQLModel")]
+
+
 @strawberry.federation.type(
     keys=["id"], description="""Entity representing a Rank Type"""
 )
@@ -50,7 +55,7 @@ class RankTypeGQLModel(BaseGQLModel):
     rank: typing.List["RankGQLModel"] = strawberry.field(
         description="""Ranks associated with this rank type""",
         permission_classes=[OnlyForAuthentized],
-        resolver=VectorResolver["RankGQLModel"](fkey_field_name="ranktype_id")
+        resolver=VectorResolver["RankGQLModel"](fkey_field_name="ranktype_id", whereType=None)
     )
 
 @createInputs
@@ -61,7 +66,11 @@ class RankTypeInputFilter:
         default=None,
         permission_classes=[OnlyForAuthentized]
     )
-    name_en: str
+    name_en: typing.Optional[str] = strawberry.field(
+        description="Filter by rank type name english",
+        default=None,
+        permission_classes=[OnlyForAuthentized]
+    )
 
 rank_type_by_id = strawberry.field(
     description="""Finds a rank type by its ID""",
@@ -83,6 +92,7 @@ class RankTypeInsertGQLModel:
         permission_classes=[OnlyForAuthentized]
     )
     name_en: str = strawberry.field(description="english name of the rank type")
+    id: typing.Optional[IDType] = strawberry.field(description="primary key", default=None)
 
 @strawberry.input(description="set of updateable attributes")
 class RankTypeUpdateGQLModel:
