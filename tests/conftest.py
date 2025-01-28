@@ -5,9 +5,13 @@ import uvicorn
 import pytest_asyncio
 import pydantic
 import time
-
-
 from contextlib import contextmanager
+import aiohttp
+from src.Dataloaders import createLoadersContext
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+from src.DBDefinitions import BaseModel
+from src.DBFeeder import initDB
 
 class Item(pydantic.BaseModel):
     # Model pro GraphQL dotazy
@@ -55,9 +59,6 @@ def runOauth(port, resolvers):
 #     yield from runUserInfo(UserInfoServerPort, AdminUser)
 
 # @pytest.fixture(scope="session")
-
-import aiohttp
-import pydantic
 
 def serveMe(item: Item):
     # Resolver pro obsluhu dotazu 'me'
@@ -134,14 +135,18 @@ NoRole_UG_Server = Server
 #         # "ug_connection": get_ug_connection
 #     }
 
+class Request:
+    @property
+    def cookies(self):
+        return {}
+    @property
+    def headers(self):
+        return {}
+
 @pytest_asyncio.fixture
 async def Context():
     # Fixture pro vytvoření kontextu s asynchronními session a dataloadery
     # async_session_maker
-    from sqlalchemy.ext.asyncio import create_async_engine
-    from sqlalchemy.ext.asyncio import AsyncSession
-    from sqlalchemy.orm import sessionmaker
-    from src.DBDefinitions import BaseModel
     asyncEngine = create_async_engine("sqlite+aiosqlite:///:memory:")
     # asyncEngine = create_async_engine("sqlite+aiosqlite:///data.sqlite")
     async with asyncEngine.begin() as conn:
@@ -156,21 +161,11 @@ async def Context():
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setenv("DEMODATA", "True")
 
-    from src.DBFeeder import initDB
     await initDB(asyncSessionMaker=async_session_maker, filename="./systemdata.json")
     # context
-    from src.Dataloaders import createLoadersContext
     loadersContext = createLoadersContext(asyncSessionMaker=async_session_maker)
     # ...
 
-    class Request:
-        @property
-        def cookies(self):
-            return {}
-        @property
-        def headers(self):
-            return {}
-        
     context_ = {
         **loadersContext,
         "request": Request(),
