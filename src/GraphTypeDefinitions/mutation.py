@@ -11,10 +11,7 @@ from .WorkHistoryGQLModel import work_history_insert, work_history_update, work_
 from .RelatedDocGQLModel import related_doc_insert, related_doc_update, related_doc_delete
 from .RankTypeGQLModel import rank_type_insert, rank_type_update, rank_type_delete
 from .RankGQLModel import rank_insert, rank_update, rank_delete
-from .StudyGQLModel import study_insert, study_update, study_delete
-
-
-
+from .StudyGQLModel import study_insert, study_update, study_delete  # Přidán import pro StudyGQLModel
 
 @strawberry.type(description="Root Mutation for all entities")
 class Mutation:
@@ -73,4 +70,4 @@ class Mutation:
     study_update = study_update
     study_delete = study_delete
 
-    
+

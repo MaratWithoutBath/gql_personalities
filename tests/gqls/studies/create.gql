@@ -1,5 +1,7 @@
-mutation InsertStudy($entity: StudyInsertInput!) {
-  insertStudy(entity: $entity) {
+mutation StudyInsert($name: String!, $nameEn: String!, $program: String!, $start: DateTime!, $end: DateTime!, $userId: UUID) {
+  studyInsert(
+    entity: {name: $name, nameEn: $nameEn, program: $program, start: $start, end: $end, userId: $userId}
+  ) {
     __typename
     ... on StudyGQLModel {
       id
@@ -10,7 +12,8 @@ mutation InsertStudy($entity: StudyInsertInput!) {
       end
     }
     ... on InsertError {
-      errorMessage
+      failed
+      msg
     }
   }
 }

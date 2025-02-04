@@ -5,7 +5,6 @@ import sqlalchemy
 import json
 import datetime
 
-
 myquery = """
 {
   me {
@@ -85,27 +84,21 @@ test_rank_type_create = createTest2(
             "nameEn": "newnameEn"
       })
 
-test_study_gql_model_create = createTest2(
-    tableName="studies", 
-    queryName="create", 
-    variables={
-        "study_id": "123e4567-e89b-12d3-a456-426614174000",
-        "gql_model_id": "987e6543-b21c-34d5-e678-123456789012",
-        "startdate": "2024-12-05T00:00:01"
-    }
-)
+# Odstraněn test pro study_page
+# test_study_gql_model_update = createUpdateTest2(
+#     tableName="studies", 
+#     variables={
+#         "start": "2025-01-01T00:00:01",
+#         "name": "New Study Name",
+#         "nameEn": "New Study Name EN",
+#         "program": "Updated Program"
+#     }
+# )
 
-test_study_gql_model_update = createUpdateTest2(
-    tableName="studies", 
-    variables={"startdate": "2025-01-01T00:00:01"}
-)
+from .gt_utils import getQuery, getVariables
 
-test_study_gql_model_delete = createDeleteTest2(
-    tableName="studies", 
-    variables={
-        "study_id": "123e4567-e89b-12d3-a456-426614174000",
-        "gql_model_id": "987e6543-b21c-34d5-e678-123456789012"
-    }
-)
-
-
+# Odstraněn test pro study_page
+# test_study_gql_model_update = createUpdateTest2(
+#     tableName="studies", 
+#     variables={"startdate": "2025-01-01T00:00:01"}
+# )

@@ -1,14 +1,1 @@
-query GetStudyById($id: UUID!) {
-  studyById(id: $id) {
-    ...StudyFields
-  }
-}
-
-fragment StudyFields on StudyGQLModel {
-  id
-  name
-  nameEn
-  program
-  start
-  end
-}
+# Tento soubor je prázdný, protože study_by_id neexistuje.

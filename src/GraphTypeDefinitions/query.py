@@ -11,7 +11,7 @@ from .WorkHistoryGQLModel import work_history_by_id, work_history_page
 from .RelatedDocGQLModel import related_doc_by_id, related_doc_page
 from .RankGQLModel import rank_by_id, rank_page
 from .RankTypeGQLModel import rank_type_by_id, rank_type_page
-
+# from .StudyGQLModel import study_by_id, study_page  # Odstraněn import pro StudyGQLModel
 
 @strawberry.type(description="Root Query for all entities")
 class Query:
@@ -54,3 +54,7 @@ class Query:
     # Rank Type queries
     rank_type_by_id = rank_type_by_id
     rank_type_page = rank_type_page
+
+    # Study queries
+    # study_by_id = study_by_id
+    # study_page = study_page
