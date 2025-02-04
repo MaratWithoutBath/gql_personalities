@@ -2,6 +2,15 @@ import strawberry
 import typing
 from datetime import datetime
 from uuid import UUID
+from uoishelpers.gqlpermissions import OnlyForAuthentized, SimpleInsertPermission, SimpleUpdatePermission, SimpleDeletePermission
+from uoishelpers.resolvers import Insert, InsertError, Update, UpdateError, Delete, DeleteError
+from .BaseGQLModel import BaseGQLModel, IDType  # Opravený import pro správné ID
+from uoishelpers.resolvers import getLoadersFromInfo  # Pro databázové načítání¨
+
+from .StudyGQLModel import StudyGQLModel, StudyInsertGQLModel, StudyUpdateGQLModel, StudyDeleteGQLModel
+
+
+
 
 @strawberry.type
 class StudyGQLModel:
@@ -38,3 +47,42 @@ class StudyUpdateGQLModel:
 class StudyDeleteGQLModel:
     id: UUID = strawberry.field(description="Primary key")
     lastchange: datetime = strawberry.field(description="Timestamp")
+
+
+# 🔹 Mutace pro vytvoření (CREATE)
+@strawberry.mutation(
+    description="Creates a new study",
+    permission_classes=[OnlyForAuthentized, SimpleInsertPermission[StudyGQLModel](roles=["administrátor"])]
+)
+async def study_insert(
+    self, info: strawberry.types.Info, entity: StudyInsertGQLModel
+) -> typing.Union[StudyGQLModel, InsertError[StudyGQLModel]]:
+    return await Insert[StudyGQLModel].DoItSafeWay(info=info, entity=entity)
+
+# 🔹 Mutace pro aktualizaci (UPDATE)
+@strawberry.mutation(
+    description="Updates an existing study",
+    permission_classes=[OnlyForAuthentized, SimpleUpdatePermission[StudyGQLModel](roles=["administrátor"])]
+)
+async def study_update(
+    self, info: strawberry.types.Info, entity: StudyUpdateGQLModel
+) -> typing.Union[StudyGQLModel, UpdateError[StudyGQLModel]]:
+    return await Update[StudyGQLModel].DoItSafeWay(info=info, entity=entity)
+
+# 🔹 Mutace pro smazání (DELETE)
+@strawberry.mutation(
+    description="Deletes an existing study",
+    permission_classes=[OnlyForAuthentized, SimpleDeletePermission[StudyGQLModel](roles=["administrátor"])]
+)
+async def study_delete(
+    self, info: strawberry.types.Info, entity: StudyDeleteGQLModel
+) -> typing.Optional[DeleteError[StudyGQLModel]]:
+    return await Delete[StudyGQLModel].DoItSafeWay(info=info, entity=entity)
+
+
+
+
+
+
+
+

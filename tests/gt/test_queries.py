@@ -84,3 +84,28 @@ test_rank_type_create = createTest2(
             "name": "newname",
             "nameEn": "newnameEn"
       })
+
+test_study_gql_model_create = createTest2(
+    tableName="studies", 
+    queryName="create", 
+    variables={
+        "study_id": "123e4567-e89b-12d3-a456-426614174000",
+        "gql_model_id": "987e6543-b21c-34d5-e678-123456789012",
+        "startdate": "2024-12-05T00:00:01"
+    }
+)
+
+test_study_gql_model_update = createUpdateTest2(
+    tableName="studies", 
+    variables={"startdate": "2025-01-01T00:00:01"}
+)
+
+test_study_gql_model_delete = createDeleteTest2(
+    tableName="studies", 
+    variables={
+        "study_id": "123e4567-e89b-12d3-a456-426614174000",
+        "gql_model_id": "987e6543-b21c-34d5-e678-123456789012"
+    }
+)
+
+
