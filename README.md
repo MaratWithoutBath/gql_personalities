@@ -101,7 +101,7 @@ docker-compose up
   - napsání testu pro studyGQLModel (zatím nefunkční)
 - 04-02-2025 (kolem půlnoci)
   - opraveny testy na StudyGQLModel, pokrytí 93% a nikde pokrytí neklesá pod 60%
-  -psali jsem 2x, protože jsem si to jednou smazal 7:c
+  - psali jsem 2x, protože jsem si to jednou smazal 7:c
 
 rozdělení práce
 ## míra
