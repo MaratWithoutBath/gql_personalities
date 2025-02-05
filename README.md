@@ -114,6 +114,38 @@ rozdělení práce
 - [ ] System data
 - [ ] data loaders
 
+# To Do list (practivally complete)
+## Požadavky
+
+
+- [ ] všechny typy, input typy (s vyjímkou filtrů), mají description 
+- [ ] všechny GQL typy mají private attribut _data, což je odpovídající db řádek (neplatí pro extended types)
+	- zeptat se
+- [ ] všechny GQL typy a odpovídající DB modely mají atributy
+	- 
+	    - lastchange
+	    - created
+	    - changedby_id
+	    - createby_id
+	    - rbacobject_id
+    - zajistěno dědičností
+- [ ] vektorové atributy mají volitelné parametry where, limit a skip (je možné se domluvit na výjimce) a mají alternativu podle standardu relay connection
+	- ukázáno panem Š. jde o soubory ve složce GraphTypeDefinitions, většinu funkcionality zajišťuje dekorátor "@createInputs"
+- [ ] součástí filtrů (where) bude primární klíč i cizí klíče
+	- zajištěno, nachází se tam jak cizí, tak primární klíče
+- [ ] počáteční import dat je realizován jako asynchronní task:
+	- task = asyncio.create_task(initDB(asyncSessionMaker))  
+	- hotovo v main.py, kolem řádku 80
+- [ ] mutace upravit tak, aby používaly
+	- from uoishelpers.resolvers import encapsulateInsert, encapsulateUpdate, encapsulateDelete
+	- (je možné se domluvit na výjimce)
+- [ ] všechny typy, inputs, apod. mají description
+- [ ] všechny atributy mají anotace, např. Annotated[Optional[str], strawberry.argument(description="")]="0"
+- [ ] u všech fields jsou permission classes a v komentáři uvedeno, kdo má k atributu či funkcionalitě přístup
+	- zajištěno dědičností
+- [ ] testy s alespoň 90% pokrytím pomocí dotazů, ty jsou uloženy v systému souborů (read.gql, create.gql, …)
+
+
 # Usefull commands
 
 ```bash
