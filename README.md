@@ -95,8 +95,13 @@ docker-compose up
 - 23-01-2025 
   - kontrola požadavků a počítání bodů
   - spuštění testu - došlo nám, že opravdu máme 80%
-- 26-01-2025 - 27-01.2025
+- 26-01-2025 - 27-01-2025
   - přidávání tetsů pro ranktype - POKRYTÍ KRÁSNÝCH 90%
+- 30-01-2025
+  - napsání testu pro studyGQLModel (zatím nefunkční)
+- 04-02-2025 (kolem půlnoci)
+  - opraveny testy na StudyGQLModel, pokrytí 93% a nikde pokrytí neklesá pod 60%
+  -psali jsem 2x, protože jsem si to jednou smazal 7:c
 
 rozdělení práce
 ## míra
