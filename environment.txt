@@ -1,4 +1,53 @@
+# Application Configuration Settings
+#
+# This file centralizes key parameters for the application's behavior
+# across different environments, primarily focusing on development and testing.
+# Each setting is carefully documented to ensure clarity and maintainability.
+#
+# -----------------------------------------------------------------------------
+
+#
+# DEMO Mode Activation Flag
+#
+# Controls whether the application operates in a special demonstration mode.
+# When set to 'True', certain features might be enabled or disabled
+# to facilitate presentations or quick testing without full data setup.
+# This is typically used in non-production environments.
+#
 DEMO=True
+
+#
+# DEMO Data Loading Flag
+#
+# Specifies if pre-configured, illustrative dataset should be loaded
+# upon application startup. This is often coupled with 'DEMO=True'
+# to provide immediate, sample data for development or showcasing features.
+# Setting this to 'True' usually populates temporary data stores.
+#
 DEMODATA=True
+
+#
+# DEMO User Definition Object
+#
+# Defines the identity of a default demonstration user.
+# This object includes a unique identifier, first name, and surname.
+# In demo mode, the application might automatically log in this user,
+# or use these credentials for simulated user interactions.
+# The 'id' field is a standard UUID for consistent identification.
+#
 DEMOUSER={"id": "2d9dc5ca-a4a2-11ed-b9df-0242ac120003", "name": "John", "surname": "Newbie"}
+
+#
+# GraphQL Endpoint URL Configuration
+#
+# Specifies the Uniform Resource Locator for the GraphQL API endpoint.
+# The application communicates with this endpoint to fetch and manipulate data.
+# 'http://localhost:33001/api/gql' points to a local development server instance,
+# which is common for local testing and integration of front-end and back-end components.
+# This URL should be updated for staging or production deployments.
+#
 GQLUG_ENDPOINT_URL=http://localhost:33001/api/gql
+
+# -----------------------------------------------------------------------------
+# End of Configuration File
+# Please ensure all changes are reviewed before committing.
